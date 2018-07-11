@@ -26,6 +26,22 @@ Loading required package: impute
 > library(MASS)
 > library(RSpectra)
 > source("GEV.R")
-Error in library(psych) : there is no package called ‘psych’
-Calls: source -> withVisible -> eval -> eval -> library
+> 
+> args=(commandArgs(TRUE))
+> 
+> ##args is now a list of character vectors
+> ## First check to see if arguments are passed.
+> ## Then cycle through each element of the list and evaluate the expressions.
+> if(length(args)==0){
++     case.id = 1  
++ }else{
++     for(i in 1:length(args)){
++         eval(parse(text=args[[i]]))
++     }
++ }
+Error in parse(text = args[[i]]) : 
+  <text>:1:6: unexpected INCOMPLETE_STRING
+1: Type="Toeplitz
+         ^
+Calls: eval -> parse
 Execution halted
