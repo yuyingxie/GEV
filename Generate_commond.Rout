@@ -26,14 +26,14 @@ Type 'q()' to quit R.
 + 		for(p in c(500)){
 + 				for(n in c(300)){
 + 							write(paste("R CMD BATCH --no-save --no-restore '--args case.id=", 
-+ 											i, " Type=\"",  Type, " p=", p, " n=", n,  "' GEV_study.R temp/GEV.output._", Type, 
++ 											i, " Type=\"",  Type, "\"", " p=", p, " n=", n,  "' GEV_study.R temp/GEV.output._", Type, 
 + 											"_",  "p", p, "_n",n, "_id", i, 
 + 											".txt", sep=""), file = "command_list", append = TRUE)
 + 						}
 + 					}
 + 				}
-+ 			}
++ }
 > 
 > proc.time()
    user  system elapsed 
-  0.204   0.050   0.242 
+  0.180   0.048   0.215 
