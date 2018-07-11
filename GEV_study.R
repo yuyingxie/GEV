@@ -40,6 +40,6 @@ res = CCACV(dat$X, dat$Y, fold = 5, lambdax =seq(0.001, 0.2, length =30),
 lambda = c(rep( res$lambdaopt[1], p), rep( res$lambdaopt[2], p))
 W2 = GEV_FISTA(Sig_est, U_est, lambda = lambda, diff_thre = 1e-6, max_iter = 1000)
 
-result = list(PMA_A = Get_errorF(A, W1$u), PMA_B = Get_errorF(A, W2[1:p, ]), 
-                    GEV_A = Get_errorF(B, W1$v), GEV_B = Get_errorF(B, W2[(p + 1):(2*p), ]))
+result = list(PMA_A = Get_errorF(dat$A, W1$u), PMA_B = Get_errorF(dat$B, W1$v]), 
+                    GEV_A = Get_errorF(dat$A, W2[1:p, ]), GEV_B = Get_errorF(dat$B, W2[(p + 1):(2*p), ]))
 save(result,  file = paste("./Result/",  Type, "_p", p, "_n_", n,"_id", case_id,"_Res.Rdata", sep = "")) 
