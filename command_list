@@ -1,3 +1,3 @@
-R CMD BATCH --no-save --no-restore '--args case.id=1 Type="Toeplitz p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id1.txt&
-R CMD BATCH --no-save --no-restore '--args case.id=2 Type="Toeplitz p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id2.txt&
-R CMD BATCH --no-save --no-restore '--args case.id=3 Type="Toeplitz p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id3.txt&
+R CMD BATCH --no-save --no-restore '--args case.id=1 Type="Toeplitz" p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id1.txt&
+R CMD BATCH --no-save --no-restore '--args case.id=2 Type="Toeplitz" p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id2.txt&
+R CMD BATCH --no-save --no-restore '--args case.id=3 Type="Toeplitz" p=50 n=300' GEV_study.R GEV.output._Toeplitz_p50_n300_id3.txt&

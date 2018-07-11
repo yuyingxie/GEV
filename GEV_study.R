@@ -20,10 +20,12 @@ if(length(args)==0){
     }
 }
 
-load(paste("Data/", Type, "_p", p, "_n_", n, "_id", cae.id, ".Rdata", sep = ""))
+load(paste("Data/", Type, "_p", p, "_n_", n, "_id", case.id, ".Rdata", sep = ""))
 
-Ome_est[1:p, (p + 1): (2 * p)] = t(dat$X) %*% Y / n
-Ome_est[ (p + 1): (2 * p), 1:p] = t(dat$Y) %*% X /n
+Sig_est = Ome_est = matrix(0, 2 * p, 2 * p)
+
+Ome_est[1:p, (p + 1): (2 * p)] = t(dat$X) %*% dat$Y / n
+Ome_est[ (p + 1): (2 * p), 1:p] = t(dat$Y) %*% dat$X /n
 Sig_est[1:p, 1:p] = t(dat$X) %*% dat$X /n
 Sig_est[(p + 1): (2 * p), (p + 1): (2 * p)] = t(dat$Y) %*% dat$Y / n
 
