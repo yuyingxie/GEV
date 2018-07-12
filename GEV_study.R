@@ -35,8 +35,8 @@ W1 = CCA(x = dat$X, z = dat$Y,  penaltyx = perm.out$bestpenaltyx, standardize = 
         v = perm.out$v.init, penaltyz = perm.out$bestpenaltyz, K = 2)
 
 U_est = Re(Get_U(Ome_est, 2))
-res = CCACV(dat$X, dat$Y, fold = 5, lambdax =seq(0.001, 0.2, length =30), 
-        lambday =seq(0.001, 0.2, length = 30), k = 2)
+res = CCACV(dat$X, dat$Y, fold = 5, lambdax =seq(0.001, 0.2, length =20), 
+        lambday =seq(0.001, 0.2, length = 20), k = 2)
 lambda = c(rep( res$lambdaopt[1], p), rep( res$lambdaopt[2], p))
 W2 = GEV_FISTA(Sig_est, U_est, lambda = lambda, diff_thre = 1e-6, max_iter = 1000)
 
