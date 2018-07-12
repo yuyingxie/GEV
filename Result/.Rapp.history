@@ -2,3 +2,14 @@ load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplit
 result
 load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p50_n_300_id2_Res.Rdata")
 result
+load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id3_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id5_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id9_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id1_Res.Rdata")
+res
+result
+load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id3_Res.Rdata")
+result
