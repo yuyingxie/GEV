@@ -33,3 +33,11 @@ load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GE
 result
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id29_Res.Rdata")
 result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p50_n_300_id6_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p50_n_300_id8_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p50_n_300_id5_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p50_n_300_id6_Res.Rdata")
+result
