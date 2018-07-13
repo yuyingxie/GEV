@@ -86658,3 +86658,46 @@ Loading required package: impute
 [fold=5]i=20j=20
 > lambda = c(rep( res$lambdaopt[1], p), rep( res$lambdaopt[2], p))
 > W2 = GEV_FISTA(Sig_est, U_est, lambda = lambda, diff_thre = 1e-6, max_iter = 1000)
+[2]dif=0.56714; Loss=-0.3378019
+[3]dif=0.19327; Loss=-0.36898
+[4]dif=0.08891; Loss=-0.373374
+[5]dif=0.03541; Loss=-0.3739265
+[6]dif=0.01536; Loss=-0.373982
+[7]dif=0.00619; Loss=-0.3739878
+[8]dif=0.00331; Loss=-0.3739911
+[9]dif=0.00205; Loss=-0.3739937
+[10]dif=0.00177; Loss=-0.3739954
+[11]dif=0.00134; Loss=-0.3739962
+[12]dif=0.00098; Loss=-0.3739964
+[13]dif=0.00054; Loss=-0.3739964
+[14]dif=0.00023; Loss=-0.3739964
+[15]dif=0.00021; Loss=-0.3739964
+[16]dif=0.00024; Loss=-0.3739965
+[17]dif=2e-04; Loss=-0.3739965
+[18]dif=0.00012; Loss=-0.3739965
+[19]dif=5e-05; Loss=-0.3739965
+[20]dif=4e-05; Loss=-0.3739965
+[21]dif=5e-05; Loss=-0.3739965
+[22]dif=5e-05; Loss=-0.3739965
+[23]dif=3e-05; Loss=-0.3739965
+[24]dif=2e-05; Loss=-0.3739965
+[25]dif=1e-05; Loss=-0.3739965
+[26]dif=1e-05; Loss=-0.3739965
+[27]dif=1e-05; Loss=-0.3739965
+[28]dif=1e-05; Loss=-0.3739965
+[29]dif=1e-05; Loss=-0.3739965
+[30]dif=0; Loss=-0.3739965
+[31]dif=0; Loss=-0.3739965
+[32]dif=0; Loss=-0.3739965
+[33]dif=0; Loss=-0.3739965
+[34]dif=0; Loss=-0.3739965
+[35]dif=0; Loss=-0.3739965
+> 
+> result = list(PMA_A = Get_errorF(dat$A, W1$u), PMA_B = Get_errorF(dat$B, W1$v), 
++                     GEV_A = Get_errorF(dat$A, W2[1:p, ]), GEV_B = Get_errorF(dat$B, W2[(p + 1):(2*p), ]), 
++                     resCV = res)
+> save(result,  file = paste("./Result/",  Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
+> 
+> proc.time()
+   user  system elapsed 
+ 79.464   1.203  80.659 
