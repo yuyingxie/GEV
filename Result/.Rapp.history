@@ -13,3 +13,23 @@ res
 result
 load("/Users/yuyingxie/Dropbox (Personal)/paper4_SDR/Code/CCA/GEV/Result/Toeplitz_p500_n_300_id3_Res.Rdata")
 result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id8_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id10_Res.Rdata")
+result
+rest
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p500_n_2000_id6_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p500_n_2000_id3_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p500_n_300_id4_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p500_n_2000_id12_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p500_n_2000_id15_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/NN_p500_n_2000_id10_Res.Rdata")
+result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id29_Res.Rdata")
+result
