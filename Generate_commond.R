@@ -1,6 +1,6 @@
 
 unlink('command_list')
-for (i in 1:10){
+for (i in 11:20){
 	for(Type in c("Toeplitz")){
 		for(p in c(50)){
 				for(n in c(300)){
