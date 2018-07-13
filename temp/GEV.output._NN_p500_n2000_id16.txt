@@ -1,0 +1,469 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # TODO: Add comment
+> # 
+> # Author: xyy
+> ###############################################################################
+> library(PMA)
+Loading required package: impute
+> library(MASS)
+> library(RSpectra)
+> source("GEV.R")
+> 
+> args=(commandArgs(TRUE))
+> 
+> ##args is now a list of character vectors
+> ## First check to see if arguments are passed.
+> ## Then cycle through each element of the list and evaluate the expressions.
+> if(length(args)==0){
++     case.id = 1  
++ }else{
++     for(i in 1:length(args)){
++         eval(parse(text=args[[i]]))
++     }
++ }
+> 
+> load(paste("Data/", Type, "_p", p, "_n_", n, "_id", case.id, ".Rdata", sep = ""))
+> 
+> Sig_est = Ome_est = matrix(0, 2 * p, 2 * p)
+> 
+> Ome_est[1:p, (p + 1): (2 * p)] = t(dat$X) %*% dat$Y / n
+> Ome_est[ (p + 1): (2 * p), 1:p] = t(dat$Y) %*% dat$X /n
+> Sig_est[1:p, 1:p] = t(dat$X) %*% dat$X /n
+> Sig_est[(p + 1): (2 * p), (p + 1): (2 * p)] = t(dat$Y) %*% dat$Y / n
+> 
+> perm.out <- CCA.permute(x = dat$X, z = dat$Y, typex="standard", standardize = FALSE,
++         typez = "standard", nperms = 10, penaltyxs = seq(.02, .9, len = 10))
+
+ Permutation  1  out of  10  12345678910
+ Permutation  2  out of  10  12345678910
+ Permutation  3  out of  10  12345678910
+ Permutation  4  out of  10  12345678910
+ Permutation  5  out of  10  12345678910
+ Permutation  6  out of  10  12345678910
+ Permutation  7  out of  10  12345678910
+ Permutation  8  out of  10  12345678910
+ Permutation  9  out of  10  12345678910
+ Permutation  10  out of  10  12345678910
+> W1 = CCA(x = dat$X, z = dat$Y,  penaltyx = perm.out$bestpenaltyx, standardize = FALSE,
++         v = perm.out$v.init, penaltyz = perm.out$bestpenaltyz, K = 2)
+123456789101112
+12345678
+> 
+> U_est = Re(Get_U(Ome_est, 2))
+> res = CCACV(dat$X, dat$Y, fold = 5, lambdax =seq(0.001, 0.2, length =20), 
++         lambday =seq(0.001, 0.2, length = 20), k = 2)
+[2]dif=0.43642; Loss=-0.4967868
+[3]dif=0.20046; Loss=-0.7872304
+[4]dif=0.14309; Loss=-0.8646343
+[5]dif=0.09951; Loss=-0.8881105
+[6]dif=0.07413; Loss=-0.8984358
+[7]dif=0.06306; Loss=-0.9057412
+[8]dif=0.058; Loss=-0.9119908
+[9]dif=0.05472; Loss=-0.9173287
+[10]dif=0.05155; Loss=-0.9217391
+[11]dif=0.048; Loss=-0.9252471
+[12]dif=0.04421; Loss=-0.927968
+[13]dif=0.04036; Loss=-0.9300597
+[14]dif=0.03667; Loss=-0.9316577
+[15]dif=0.03315; Loss=-0.9328548
+[16]dif=0.02984; Loss=-0.9337361
+[17]dif=0.0267; Loss=-0.9343726
+[18]dif=0.02377; Loss=-0.9348265
+[19]dif=0.02106; Loss=-0.9351484
+[20]dif=0.01858; Loss=-0.9353655
+[21]dif=0.0163; Loss=-0.9355119
+[22]dif=0.0142; Loss=-0.935608
+[23]dif=0.01231; Loss=-0.9356707
+[24]dif=0.01069; Loss=-0.9357116
+[25]dif=0.00931; Loss=-0.9357391
+[26]dif=0.00811; Loss=-0.9357594
+[27]dif=0.00717; Loss=-0.9357766
+[28]dif=0.00642; Loss=-0.9357929
+[29]dif=0.00588; Loss=-0.9358085
+[30]dif=0.00544; Loss=-0.935824
+[31]dif=0.00512; Loss=-0.9358372
+[32]dif=0.00485; Loss=-0.9358511
+[33]dif=0.00462; Loss=-0.9358652
+[34]dif=0.00446; Loss=-0.9358787
+[35]dif=0.00432; Loss=-0.9358911
+[36]dif=0.00417; Loss=-0.9359032
+[37]dif=0.00402; Loss=-0.9359147
+[38]dif=0.00387; Loss=-0.9359251
+[39]dif=0.00373; Loss=-0.935934
+[40]dif=0.00358; Loss=-0.9359418
+[41]dif=0.00342; Loss=-0.9359484
+[42]dif=0.00326; Loss=-0.9359541
+[43]dif=0.00311; Loss=-0.9359588
+[44]dif=0.00294; Loss=-0.9359626
+[45]dif=0.00278; Loss=-0.9359655
+[46]dif=0.00261; Loss=-0.9359679
+[47]dif=0.00244; Loss=-0.9359697
+[48]dif=0.00227; Loss=-0.9359712
+[49]dif=0.00212; Loss=-0.9359724
+[50]dif=0.00199; Loss=-0.9359735
+[51]dif=0.00187; Loss=-0.9359745
+[52]dif=0.00178; Loss=-0.9359755
+[53]dif=0.0017; Loss=-0.9359765
+[54]dif=0.00162; Loss=-0.9359776
+[55]dif=0.00156; Loss=-0.9359786
+[56]dif=0.00152; Loss=-0.9359796
+[57]dif=0.00147; Loss=-0.9359806
+[58]dif=0.00142; Loss=-0.9359816
+[59]dif=0.00138; Loss=-0.9359825
+[60]dif=0.00134; Loss=-0.9359834
+[61]dif=0.0013; Loss=-0.9359842
+[62]dif=0.00126; Loss=-0.9359849
+[63]dif=0.00122; Loss=-0.9359855
+[64]dif=0.00118; Loss=-0.9359861
+[65]dif=0.00114; Loss=-0.9359866
+[66]dif=0.0011; Loss=-0.9359871
+[67]dif=0.00106; Loss=-0.9359876
+[68]dif=0.00101; Loss=-0.935988
+[69]dif=0.00097; Loss=-0.9359883
+[70]dif=0.00092; Loss=-0.9359886
+[71]dif=0.00088; Loss=-0.9359889
+[72]dif=0.00085; Loss=-0.9359892
+[73]dif=0.00082; Loss=-0.9359894
+[74]dif=0.00079; Loss=-0.9359896
+[75]dif=0.00076; Loss=-0.9359897
+[76]dif=0.00073; Loss=-0.9359899
+[77]dif=0.00071; Loss=-0.93599
+[78]dif=0.00069; Loss=-0.93599
+[79]dif=0.00067; Loss=-0.9359901
+[80]dif=0.00065; Loss=-0.9359901
+[81]dif=0.00063; Loss=-0.9359902
+[82]dif=6e-04; Loss=-0.9359902
+[83]dif=0.00058; Loss=-0.9359903
+[84]dif=0.00056; Loss=-0.9359903
+[85]dif=0.00054; Loss=-0.9359904
+[86]dif=0.00052; Loss=-0.9359905
+[87]dif=5e-04; Loss=-0.9359906
+[88]dif=0.00048; Loss=-0.9359907
+[89]dif=0.00047; Loss=-0.9359908
+[90]dif=0.00046; Loss=-0.935991
+[91]dif=0.00045; Loss=-0.9359911
+[92]dif=0.00044; Loss=-0.9359912
+[93]dif=0.00043; Loss=-0.9359914
+[94]dif=0.00043; Loss=-0.9359915
+[95]dif=0.00042; Loss=-0.9359916
+[96]dif=0.00042; Loss=-0.9359917
+[97]dif=0.00041; Loss=-0.9359918
+[98]dif=0.00041; Loss=-0.9359918
+[99]dif=4e-04; Loss=-0.9359919
+[100]dif=0.00039; Loss=-0.9359919
+[101]dif=0.00038; Loss=-0.9359919
+[102]dif=0.00036; Loss=-0.9359919
+[103]dif=0.00035; Loss=-0.9359919
+[104]dif=0.00033; Loss=-0.9359919
+[105]dif=0.00032; Loss=-0.9359919
+[106]dif=3e-04; Loss=-0.9359919
+[107]dif=0.00029; Loss=-0.9359919
+[108]dif=0.00028; Loss=-0.9359918
+[109]dif=0.00026; Loss=-0.9359918
+[110]dif=0.00025; Loss=-0.9359918
+[111]dif=0.00024; Loss=-0.9359918
+[112]dif=0.00023; Loss=-0.9359919
+[113]dif=0.00023; Loss=-0.9359919
+[114]dif=0.00022; Loss=-0.9359919
+[115]dif=0.00022; Loss=-0.9359919
+[116]dif=0.00022; Loss=-0.935992
+[117]dif=0.00022; Loss=-0.935992
+[118]dif=0.00022; Loss=-0.9359921
+[119]dif=0.00022; Loss=-0.9359921
+[120]dif=0.00022; Loss=-0.9359921
+[121]dif=0.00022; Loss=-0.9359922
+[122]dif=0.00022; Loss=-0.9359922
+[123]dif=0.00021; Loss=-0.9359922
+[124]dif=0.00021; Loss=-0.9359922
+[125]dif=0.00021; Loss=-0.9359922
+[126]dif=2e-04; Loss=-0.9359922
+[127]dif=0.00019; Loss=-0.9359922
+[128]dif=0.00019; Loss=-0.9359922
+[129]dif=0.00018; Loss=-0.9359922
+[130]dif=0.00017; Loss=-0.9359922
+[131]dif=0.00016; Loss=-0.9359922
+[132]dif=0.00015; Loss=-0.9359922
+[133]dif=0.00014; Loss=-0.9359922
+[134]dif=0.00014; Loss=-0.9359922
+[135]dif=0.00013; Loss=-0.9359922
+[136]dif=0.00013; Loss=-0.9359922
+[137]dif=0.00013; Loss=-0.9359922
+[138]dif=0.00013; Loss=-0.9359922
+[139]dif=0.00013; Loss=-0.9359923
+[140]dif=0.00013; Loss=-0.9359923
+[141]dif=0.00013; Loss=-0.9359923
+[142]dif=0.00013; Loss=-0.9359923
+[143]dif=0.00013; Loss=-0.9359923
+[144]dif=0.00013; Loss=-0.9359923
+[145]dif=0.00012; Loss=-0.9359923
+[146]dif=0.00012; Loss=-0.9359923
+[147]dif=0.00012; Loss=-0.9359923
+[148]dif=0.00012; Loss=-0.9359923
+[149]dif=0.00011; Loss=-0.9359923
+[150]dif=0.00011; Loss=-0.9359923
+[151]dif=1e-04; Loss=-0.9359923
+[152]dif=1e-04; Loss=-0.9359923
+[153]dif=9e-05; Loss=-0.9359923
+[154]dif=9e-05; Loss=-0.9359923
+[155]dif=9e-05; Loss=-0.9359923
+[156]dif=9e-05; Loss=-0.9359923
+[157]dif=8e-05; Loss=-0.9359923
+[158]dif=8e-05; Loss=-0.9359923
+[159]dif=8e-05; Loss=-0.9359923
+[160]dif=8e-05; Loss=-0.9359923
+[161]dif=9e-05; Loss=-0.9359923
+[162]dif=9e-05; Loss=-0.9359924
+[163]dif=9e-05; Loss=-0.9359924
+[164]dif=9e-05; Loss=-0.9359924
+[165]dif=9e-05; Loss=-0.9359924
+[166]dif=8e-05; Loss=-0.9359924
+[167]dif=8e-05; Loss=-0.9359924
+[168]dif=8e-05; Loss=-0.9359924
+[169]dif=8e-05; Loss=-0.9359924
+[170]dif=8e-05; Loss=-0.9359924
+[171]dif=7e-05; Loss=-0.9359924
+[172]dif=7e-05; Loss=-0.9359924
+[173]dif=6e-05; Loss=-0.9359924
+[174]dif=6e-05; Loss=-0.9359923
+[175]dif=6e-05; Loss=-0.9359923
+[176]dif=6e-05; Loss=-0.9359923
+[177]dif=5e-05; Loss=-0.9359923
+[178]dif=5e-05; Loss=-0.9359923
+[179]dif=5e-05; Loss=-0.9359923
+[180]dif=5e-05; Loss=-0.9359924
+[181]dif=5e-05; Loss=-0.9359924
+[182]dif=5e-05; Loss=-0.9359924
+[183]dif=5e-05; Loss=-0.9359924
+[184]dif=5e-05; Loss=-0.9359924
+[185]dif=5e-05; Loss=-0.9359924
+[186]dif=5e-05; Loss=-0.9359924
+[187]dif=5e-05; Loss=-0.9359924
+[188]dif=5e-05; Loss=-0.9359924
+[189]dif=5e-05; Loss=-0.9359924
+[190]dif=5e-05; Loss=-0.9359924
+[191]dif=5e-05; Loss=-0.9359924
+[192]dif=5e-05; Loss=-0.9359924
+[193]dif=5e-05; Loss=-0.9359924
+[194]dif=5e-05; Loss=-0.9359924
+[195]dif=5e-05; Loss=-0.9359924
+[196]dif=5e-05; Loss=-0.9359924
+[197]dif=5e-05; Loss=-0.9359924
+[198]dif=4e-05; Loss=-0.9359924
+[199]dif=4e-05; Loss=-0.9359924
+[200]dif=4e-05; Loss=-0.9359924
+[201]dif=4e-05; Loss=-0.9359924
+[202]dif=4e-05; Loss=-0.9359924
+[203]dif=4e-05; Loss=-0.9359924
+[204]dif=3e-05; Loss=-0.9359924
+[205]dif=3e-05; Loss=-0.9359924
+[206]dif=3e-05; Loss=-0.9359924
+[207]dif=3e-05; Loss=-0.9359924
+[208]dif=3e-05; Loss=-0.9359924
+[209]dif=3e-05; Loss=-0.9359924
+[210]dif=3e-05; Loss=-0.9359924
+[211]dif=3e-05; Loss=-0.9359924
+[212]dif=3e-05; Loss=-0.9359924
+[213]dif=3e-05; Loss=-0.9359924
+[214]dif=3e-05; Loss=-0.9359924
+[215]dif=3e-05; Loss=-0.9359924
+[216]dif=3e-05; Loss=-0.9359924
+[217]dif=3e-05; Loss=-0.9359924
+[218]dif=3e-05; Loss=-0.9359924
+[219]dif=3e-05; Loss=-0.9359924
+[220]dif=3e-05; Loss=-0.9359924
+[221]dif=3e-05; Loss=-0.9359924
+[222]dif=3e-05; Loss=-0.9359924
+[223]dif=3e-05; Loss=-0.9359924
+[224]dif=3e-05; Loss=-0.9359924
+[225]dif=3e-05; Loss=-0.9359924
+[226]dif=3e-05; Loss=-0.9359924
+[227]dif=3e-05; Loss=-0.9359924
+[228]dif=3e-05; Loss=-0.9359924
+[229]dif=2e-05; Loss=-0.9359924
+[230]dif=2e-05; Loss=-0.9359924
+[231]dif=2e-05; Loss=-0.9359924
+[232]dif=2e-05; Loss=-0.9359924
+[233]dif=2e-05; Loss=-0.9359924
+[234]dif=2e-05; Loss=-0.9359924
+[235]dif=2e-05; Loss=-0.9359924
+[236]dif=2e-05; Loss=-0.9359924
+[237]dif=2e-05; Loss=-0.9359924
+[238]dif=2e-05; Loss=-0.9359924
+[239]dif=2e-05; Loss=-0.9359924
+[240]dif=2e-05; Loss=-0.9359924
+[241]dif=2e-05; Loss=-0.9359924
+[242]dif=2e-05; Loss=-0.9359924
+[243]dif=2e-05; Loss=-0.9359924
+[244]dif=2e-05; Loss=-0.9359924
+[245]dif=2e-05; Loss=-0.9359924
+[246]dif=2e-05; Loss=-0.9359924
+[247]dif=2e-05; Loss=-0.9359924
+[248]dif=2e-05; Loss=-0.9359924
+[249]dif=2e-05; Loss=-0.9359924
+[250]dif=2e-05; Loss=-0.9359924
+[251]dif=2e-05; Loss=-0.9359924
+[252]dif=2e-05; Loss=-0.9359924
+[253]dif=2e-05; Loss=-0.9359924
+[254]dif=2e-05; Loss=-0.9359924
+[255]dif=2e-05; Loss=-0.9359924
+[256]dif=2e-05; Loss=-0.9359924
+[257]dif=2e-05; Loss=-0.9359924
+[258]dif=2e-05; Loss=-0.9359924
+[259]dif=2e-05; Loss=-0.9359924
+[260]dif=2e-05; Loss=-0.9359924
+[261]dif=2e-05; Loss=-0.9359924
+[262]dif=2e-05; Loss=-0.9359924
+[263]dif=2e-05; Loss=-0.9359924
+[264]dif=2e-05; Loss=-0.9359924
+[265]dif=1e-05; Loss=-0.9359924
+[266]dif=1e-05; Loss=-0.9359924
+[267]dif=1e-05; Loss=-0.9359924
+[268]dif=1e-05; Loss=-0.9359924
+[269]dif=1e-05; Loss=-0.9359924
+[270]dif=1e-05; Loss=-0.9359924
+[271]dif=1e-05; Loss=-0.9359924
+[272]dif=1e-05; Loss=-0.9359924
+[273]dif=1e-05; Loss=-0.9359924
+[274]dif=1e-05; Loss=-0.9359924
+[275]dif=1e-05; Loss=-0.9359924
+[276]dif=1e-05; Loss=-0.9359924
+[277]dif=1e-05; Loss=-0.9359924
+[278]dif=1e-05; Loss=-0.9359924
+[279]dif=1e-05; Loss=-0.9359924
+[280]dif=1e-05; Loss=-0.9359924
+[281]dif=1e-05; Loss=-0.9359924
+[282]dif=1e-05; Loss=-0.9359924
+[283]dif=1e-05; Loss=-0.9359924
+[284]dif=1e-05; Loss=-0.9359924
+[285]dif=1e-05; Loss=-0.9359924
+[286]dif=1e-05; Loss=-0.9359924
+[287]dif=1e-05; Loss=-0.9359924
+[288]dif=1e-05; Loss=-0.9359924
+[289]dif=1e-05; Loss=-0.9359924
+[290]dif=1e-05; Loss=-0.9359924
+[291]dif=1e-05; Loss=-0.9359924
+[292]dif=1e-05; Loss=-0.9359924
+[293]dif=1e-05; Loss=-0.9359924
+[294]dif=1e-05; Loss=-0.9359924
+[295]dif=1e-05; Loss=-0.9359924
+[296]dif=1e-05; Loss=-0.9359924
+[297]dif=1e-05; Loss=-0.9359924
+[298]dif=1e-05; Loss=-0.9359924
+[299]dif=1e-05; Loss=-0.9359924
+[300]dif=1e-05; Loss=-0.9359924
+[301]dif=1e-05; Loss=-0.9359924
+[302]dif=1e-05; Loss=-0.9359924
+[303]dif=1e-05; Loss=-0.9359924
+[304]dif=1e-05; Loss=-0.9359924
+[305]dif=1e-05; Loss=-0.9359924
+[306]dif=1e-05; Loss=-0.9359924
+[307]dif=1e-05; Loss=-0.9359924
+[308]dif=1e-05; Loss=-0.9359924
+[309]dif=1e-05; Loss=-0.9359924
+[310]dif=1e-05; Loss=-0.9359924
+[311]dif=1e-05; Loss=-0.9359924
+[312]dif=1e-05; Loss=-0.9359924
+[313]dif=1e-05; Loss=-0.9359924
+[314]dif=1e-05; Loss=-0.9359924
+[315]dif=1e-05; Loss=-0.9359924
+[316]dif=1e-05; Loss=-0.9359924
+[317]dif=1e-05; Loss=-0.9359924
+[318]dif=1e-05; Loss=-0.9359924
+[319]dif=1e-05; Loss=-0.9359924
+[320]dif=1e-05; Loss=-0.9359924
+[321]dif=1e-05; Loss=-0.9359924
+[322]dif=1e-05; Loss=-0.9359924
+[323]dif=1e-05; Loss=-0.9359924
+[324]dif=1e-05; Loss=-0.9359924
+[325]dif=1e-05; Loss=-0.9359924
+[326]dif=1e-05; Loss=-0.9359924
+[327]dif=1e-05; Loss=-0.9359924
+[328]dif=1e-05; Loss=-0.9359924
+[329]dif=1e-05; Loss=-0.9359924
+[330]dif=0; Loss=-0.9359924
+[331]dif=0; Loss=-0.9359924
+[332]dif=0; Loss=-0.9359924
+[333]dif=0; Loss=-0.9359924
+[334]dif=0; Loss=-0.9359924
+[335]dif=0; Loss=-0.9359924
+[336]dif=0; Loss=-0.9359924
+[337]dif=0; Loss=-0.9359924
+[338]dif=0; Loss=-0.9359924
+[339]dif=0; Loss=-0.9359924
+[340]dif=0; Loss=-0.9359924
+[341]dif=1e-05; Loss=-0.9359924
+[342]dif=1e-05; Loss=-0.9359924
+[343]dif=1e-05; Loss=-0.9359924
+[344]dif=1e-05; Loss=-0.9359924
+[345]dif=1e-05; Loss=-0.9359924
+[346]dif=1e-05; Loss=-0.9359924
+[347]dif=1e-05; Loss=-0.9359924
+[348]dif=1e-05; Loss=-0.9359924
+[349]dif=1e-05; Loss=-0.9359924
+[350]dif=1e-05; Loss=-0.9359924
+[351]dif=0; Loss=-0.9359924
+[352]dif=0; Loss=-0.9359924
+[353]dif=0; Loss=-0.9359924
+[354]dif=0; Loss=-0.9359924
+[355]dif=0; Loss=-0.9359924
+[356]dif=0; Loss=-0.9359924
+[357]dif=0; Loss=-0.9359924
+[358]dif=0; Loss=-0.9359924
+[359]dif=0; Loss=-0.9359924
+[360]dif=0; Loss=-0.9359924
+[361]dif=0; Loss=-0.9359924
+[362]dif=0; Loss=-0.9359924
+[363]dif=0; Loss=-0.9359924
+[364]dif=0; Loss=-0.9359924
+[365]dif=0; Loss=-0.9359924
+[366]dif=0; Loss=-0.9359924
+[367]dif=0; Loss=-0.9359924
+[368]dif=0; Loss=-0.9359924
+[369]dif=0; Loss=-0.9359924
+[370]dif=0; Loss=-0.9359924
+[371]dif=0; Loss=-0.9359924
+[372]dif=0; Loss=-0.9359924
+[373]dif=0; Loss=-0.9359924
+[374]dif=0; Loss=-0.9359924
+[375]dif=0; Loss=-0.9359924
+[376]dif=0; Loss=-0.9359924
+[377]dif=0; Loss=-0.9359924
+[378]dif=0; Loss=-0.9359924
+[379]dif=0; Loss=-0.9359924
+[380]dif=0; Loss=-0.9359924
+[381]dif=0; Loss=-0.9359924
+[382]dif=0; Loss=-0.9359924
+[383]dif=0; Loss=-0.9359924
+[384]dif=0; Loss=-0.9359924
+[385]dif=0; Loss=-0.9359924
+[386]dif=0; Loss=-0.9359924
+[387]dif=0; Loss=-0.9359924
+[388]dif=0; Loss=-0.9359924
+[389]dif=0; Loss=-0.9359924
+[390]dif=0; Loss=-0.9359924
+[391]dif=0; Loss=-0.9359924
+[392]dif=0; Loss=-0.9359924
+[393]dif=0; Loss=-0.9359924
+[394]dif=0; Loss=-0.9359924
+[395]dif=0; Loss=-0.9359924
+[396]dif=0; Loss=-0.9359924
+12
+[fold=1]i=1j=1
