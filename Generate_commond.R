@@ -1,6 +1,6 @@
 
 unlink('command_list')
-for (i in 11:30){
+for (i in 31:50){
 	for(Type in c("I")){
 		for(p in c(500)){
 				for(n in c(2000)){
