@@ -265,7 +265,8 @@ Col_standardize = function(X){
 }
 
 CCACV = function (X, Y, fold = 5, lambdax= seq(0.001, 0.01, length =10), k = 2,
-       lambday =  seq(0.001, 0.01, length =10), standardize = FALSE, seed = 1) 
+       lambday =  seq(0.001, 0.01, length =10), standardize = FALSE, seed = 1, diff_thre = 1e-5,
+       max_iter = 1000) 
 {
     ####################################
     ## CV for selecting tuning parameter lambda for CCA
@@ -299,7 +300,8 @@ CCACV = function (X, Y, fold = 5, lambdax= seq(0.001, 0.01, length =10), k = 2,
         
         for( i in 1:lambdax_n){
             for ( j in 1:lambday_n){
-                 W_train = CCA_GEV(trainX, trainY, lambdax = lambdax[i], lambday = lambday[j], k = k)
+                 W_train = CCA_GEV(trainX, trainY, lambdax = lambdax[i], lambday = lambday[j], k = k, 
+                         diff_thre = diff_thre, max_iter = max_iter)
                  U_train = W_train[1:p, ]
                  V_train = W_train[(p+1):(p + m), ]
                  ### Prevent some direction has all zeros
