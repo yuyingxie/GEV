@@ -1,0 +1,9 @@
+import(glmnet)
+
+export(dsda)
+export(cv.dsda)
+export(predict.dsda)
+export(dsda.path)
+export(getnorm)
+
+S3method("predict","dsda","dsda.path")

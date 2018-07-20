@@ -1,0 +1,8 @@
+cv.dsda                 Cross validation for direct sparse discriminant
+                        analysis
+dsda                    Direct sparse discriminant analysis
+dsda.path               Solution path for direct sparse discriminant
+                        analysis
+predict.dsda            Prediction for direct sparse discriminant
+                        analysis
+getnorm                 Transform the predictors so that they are normal within each class

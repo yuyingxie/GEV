@@ -1,0 +1,11 @@
+Package: dsda
+Version: 1.11
+Date: 2015-03-24
+Title: Direct sparse disciminant analysis
+Author: Qing Mai <mai@stat.fsu.edu>, Hui Zou <zouxx0019@umn.edu>, Ming Yuan <myuan@isye.gatech.edu>
+Maintainer: Qing Mai <mai@stat.fsu.edu>
+Description: Fits a sparse discriminant rule for high-dimensional data
+Imports: glmnet, Matrix
+License: X11
+Packaged: 2015-03-24 19:02:41 UTC; qmai
+Depends: R (>= 2.10)
