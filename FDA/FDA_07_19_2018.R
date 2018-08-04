@@ -38,10 +38,11 @@ Y_tr =c(rep(0, n1), rep(1, n1))
 #set.seed(6)
 mtotal = apply(X_tr, 2, mean)
 
-res = FDACV(X_tr, Y_tr, fold = 3, lambda =seq(0.001, 0.1, length =30),  k = 1)
-
+#res = FDACV(X_tr, Y_tr, fold = 3, lambda =seq(0.001, 0.1, length =30),  k = 1)
+res = FDACV(X_tr, Y_tr, fold = 20, lambda = seq(0.01, 0.2, length =20),  k = 1)
 lambda = res$lambdaopt[1]
 #W2 = GEV_FISTA(Sigw, U_est, lambda = lambda, diff_thre = 1e-6, max_iter = 1000)
+
 W2 = FDA_GEV(X_tr, Y_tr, lambda = lambda, diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE )
 
 X1_test =   mvrnorm(n = n1 , mu = rep(0, p), Sigma = Sigma)
@@ -49,13 +50,13 @@ X2_test =   mvrnorm(n = n1 , mu = mu2, Sigma = Sigma)
 X_test = rbind(X1_test, X2_test)
 Y_test = c(rep(0,  n1), rep(1,  n1))
 
-obj<-dsda(X_tr, Y_tr, X_test, Y_test)  ##perform direct sparse discriminant analysis
-obj$error * dim(X_test)[1]
 Ypredict =( (X_test - rep(1, dim(X_test)[1]) %*% t(mtotal)) %*% W2) > 0
 min( sum(Ypredict == Y_test), sum(!Ypredict == Y_test)  )
+obj<-dsda(X_tr, Y_tr, X_test, Y_test)  ##perform direct sparse discriminant analysis
+obj$error * dim(X_test)[1]
 
-plot( ( X_tr -  rep(1, n) %*% t(mtotal))    %*% W2, xlim = c(0, 400))
-plot( cbind(1, X_tr) %*% obj$beta, xlim = c(0, 400))
+plot( ( X_tr -  rep(1, n) %*% t(mtotal))    %*% W2)
+plot( cbind(1, X_tr) %*% obj$beta)
 
 ## DSDA 
 

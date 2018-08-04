@@ -13,7 +13,11 @@ Get_U = function(Omega, K){
     #temp.eigen = eigen(Omega)
     temp = eigs_sym(Omega, K * 2)
     #U = temp.eigen$vector[, 1:K] %*% diag(sqrt(temp.eigen$value[1:K]) )    
+    if(K == 1){
+        U = as.matrix(temp$vector[, 1] * sqrt(temp$value[1:K]) )
+    }else{
     U = temp$vector[, 1:K] %*% diag(sqrt(temp$value[1:K]) )    
+    }
     return(U)
 }
 
@@ -29,9 +33,6 @@ Get_U_CCA = function(Omega, K){
     U = temp$vector[, 1:(2*K)] %*% diag(sqrt(temp$value[1:(2 *K)]) )    
     return(U)
 }
-
-
-
 
 GEV_FISTA = function(Sigma, U, lambda = 0.1, diff_thre = 2e-5, max_iter = 1000){
     #####################################################
@@ -146,6 +147,40 @@ CCA_GEV =  function(X, Y, lambdax = 0.1, lambday = 0.01, diff_thre = 2e-6, max_i
     
     Sig[1:p, 1:p] = t(X) %*% X /n
     Sig[(p + 1): (m + p), (p + 1): (m + p)] = t(Y) %*% Y /n
+    U_est = Get_U(Ome, k)
+    W2 = GEV_FISTA(Sig, U_est, lambda = lambda, diff_thre = diff_thre, max_iter = max_iter)
+    return(W2)    
+}
+
+
+
+FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
+        k = 1, standardize = FALSE){
+    #####################################################
+    ##### Sparse FDA using GEV framework                                        #####
+    ##### X is the n x p matrix                                                              #####
+    ##### Y is a n x 1 label vector                                                                    #####
+    ##### lambda and lambday are the tuning parameters            #######
+    ##### standardize indictas whether the data need to be           #######
+    ##### standardized to mean 0 and sd of 1                                #######
+    ##### k is the intrinsic dim
+    ######################################################    
+    if(standardize){
+        X = center_rowmeans(X)
+    }
+    
+    p = ncol(X);  n = nrow(X); K = length(unique(Y))
+    lambda = rep(lambda, p)
+    Sig = Ome = matrix(0, p, p)
+    for(i in 1:K){
+        id = Y == (i - 1)
+        sample_size = sum(id)
+        mu = apply(X[id, ], 2, mean)
+        Xtemp = X[id, ] - rep(1, sample_size) %*% t(mu)
+        Sig = Sig + (sample_size/n) * t( Xtemp ) %*% Xtemp  
+        Ome = Ome + (sample_size/n) * mu %*% t(mu)
+    }
+    
     U_est = Get_U(Ome, k)
     W2 = GEV_FISTA(Sig, U_est, lambda = lambda, diff_thre = diff_thre, max_iter = max_iter)
     return(W2)    
@@ -330,6 +365,60 @@ CCACV = function (X, Y, fold = 5, lambdax= seq(0.001, 0.01, length =10), k = 2,
     lambdaopt = c(lambdax[i] , lambday[j])
     
     outlist <- list(cca.mean = cca.mean, cca.sd = cca.sd, lambdaopt = lambdaopt)
+    return(outlist)
+}                
+
+
+FDACV = function (X, Y, fold = 5, lambda= seq(0.001, 0.01, length =10), k = 2,
+        standardize = FALSE, seed = 1, diff_thre = 1e-5, max_iter = 1000) 
+{
+    ####################################
+    ## CV for selecting tuning parameter lambda for CCA
+    ## X: n x p matrix
+    ## Y: n x 1 vector  taking values of "0, 1, ..., K"
+    ## fold: fold of CV
+    ## lambda: the seq of lambda     
+    if(standardize){
+        X = center_rowmeans(X)
+    }
+    set.seed(seed)
+    
+    p = ncol(X);  n = nrow(X); K = length(unique(Y)); 
+    sample.size = rep(0, K)
+    trainID = NULL
+    testID = NULL
+    temp_n = 0
+    for(i in 1:K){
+        sample.size[i] = sum(Y == (i -1))
+        temp = cv.part(sample.size[i], fold)
+        trainID = rbind(trainID, temp$trainMat + temp_n)
+        testID = rbind(testID, temp$testMat + temp_n)
+        temp_n = temp_n + sample.size[i]
+    }
+    
+    lambda_n = length(lambda)
+    err.re <- matrix(0, fold, lambda_n)
+    for (f in 1:fold) {                    
+        trainX  = X[trainID[, f], ]; testX   = X[testID[, f], ]
+        trainY  = Y[trainID[, f] ];  testY   = Y[testID[, f] ]  
+        
+        for( i in 1:lambda_n){
+                W_train = FDA_GEV(trainX, trainY, lambda = lambda[i], k = k, diff_thre = diff_thre,
+                                max_iter = max_iter)
+                Xmean = apply(trainX, 2, mean)
+                Ypredict =( (testX - rep(1, dim(testX)[1]) %*% t(Xmean)) %*% W_train) > 0
+                err.re[f, i] =  min( sum(Ypredict == testY), sum(!Ypredict == testY)   )
+                cat(sep = "", "[fold=",f,"]","i=",i,  "\n")
+            }
+        }
+        
+    err.mean <- apply(err.re, 2, mean)
+    err.sd <- apply(err.re, 2, sd)
+    
+    id = which(err.mean == min(err.mean))  # finding the largest cca
+    lambdaopt = lambda[id]
+    
+    outlist <- list(err.mean = err.mean, err.sd = err.sd, lambdaopt = lambdaopt)
     return(outlist)
 }                
 
