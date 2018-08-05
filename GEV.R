@@ -80,7 +80,6 @@ GEV_FISTA = function(Sigma, U, lambda = 0.1, diff_thre = 2e-5, max_iter = 1000){
     return(W)
 }
 
-
 GEV_ISTA = function(Sigma, U, lambda = 0.1, diff_thre = 2e-5, max_iter = 1000){
     #####################################################
     ##### X is a n x p matrix  #####
@@ -155,14 +154,14 @@ CCA_GEV =  function(X, Y, lambdax = 0.1, lambday = 0.01, diff_thre = 2e-6, max_i
 
 
 FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
-        k = 1, standardize = FALSE){
+        k = 2, standardize = FALSE){
     #####################################################
     ##### Sparse FDA using GEV framework                                        #####
-    ##### X is the n x p matrix                                                              #####
-    ##### Y is a n x 1 label vector                                                                    #####
-    ##### lambda and lambday are the tuning parameters            #######
-    ##### standardize indictas whether the data need to be           #######
-    ##### standardized to mean 0 and sd of 1                                #######
+    ##### X is the n x p matrix                                                                 ####
+    ##### Y is a n x 1 label vector                                                           ####
+    ##### lambda and lambday are the tuning parameters                   ####
+    ##### standardize indictas whether the data need to be                 ####
+    ##### standardized to mean 0 and sd of 1                                       ####
     ##### k is the intrinsic dim
     ######################################################    
     if(standardize){
@@ -177,10 +176,11 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
         sample_size = sum(id)
         mu = apply(X[id, ], 2, mean)
         Xtemp = X[id, ] - rep(1, sample_size) %*% t(mu)
-        Sig = Sig + (sample_size/n) * t( Xtemp ) %*% Xtemp  
+        Sig = Sig +  t( Xtemp ) %*% Xtemp  
         Ome = Ome + (sample_size/n) * mu %*% t(mu)
     }
     
+    Sig = Sig / n
     U_est = Get_U(Ome, k)
     W2 = GEV_FISTA(Sig, U_est, lambda = lambda, diff_thre = diff_thre, max_iter = max_iter)
     return(W2)    
@@ -418,7 +418,8 @@ FDACV = function (X, Y, fold = 5, lambda= seq(0.001, 0.01, length =10), k = 2,
     id = which(err.mean == min(err.mean))  # finding the largest cca
     lambdaopt = lambda[id]
     
-    outlist <- list(err.mean = err.mean, err.sd = err.sd, lambdaopt = lambdaopt)
+    outlist <- list(err.mean = err.mean, err.sd = err.sd, lambdaopt = lambdaopt, fold = fold,
+            lambda_seq = lambda)
     return(outlist)
 }                
 
