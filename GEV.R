@@ -236,20 +236,19 @@ FDA_pred = function(X, Y, X_test, Y_test, lambda = 0.1, diff_thre = 2e-6, max_it
 
 Orc_pred = function(mu, Sigma, X_test, Y_test){
     #####################################################
-    ##### Oracle pediction Sparse FDA using GEV framework                         ####
+    ##### Oracle pediction Sparse FDA using GEV framework                 ####
     ##### mu is the p x K matrix containing centroid                                ####
     ##### Sigma is a p x p Covariance  matrix                                          ####
     ##### X_test is the m x p matrix                                                          ####
     ##### Y is a m x 1 label vector                                                           ####
-    ######################################################    
-    
+    ######################################################        
     K = dim(mu)[2]; p = dim(mu)[1]
     U = matrix(0, p, K - 1); n = dim(X_test)[1]
-    mtotal = apply(X_test, 2, mean)
+    mtotal = apply(mu, 1, mean)
     Post = matrix(0, n, K)
    
     for(i in 1:K){
-        Post[, i] = (X_test - 0.5 * rep(1, n) %*% t(mu[, i])) %*% solve(Sigma) %*% (mu[, i] - mtotal)
+        Post[, i] = (X_test - 0.5 * rep(1, n) %*% t(mu[, i])) %*% solve(Sigma) %*% (mu[, i] )
         #U[, i] = solve(Sigma) %*% (mu[, i + 1] - mu[, 1])
     }
     
@@ -481,11 +480,10 @@ FDACV = function (X, Y, fold = 5, lambda= seq(0.001, 0.01, length =10), k = 2,
     err.re <- matrix(0, fold, lambda_n)
     for (f in 1:fold) {                    
         trainX  = X[trainID[, f], ]; testX   = X[testID[, f], ]
-        trainY  = Y[trainID[, f] ];  testY   = Y[testID[, f] ]  
-        
+        trainY  = Y[trainID[, f] ];  testY   = Y[testID[, f] ]          
         for( i in 1:lambda_n){
-                W_train = FDA_GEV(trainX, trainY, lambda = lambda[i], k = k, diff_thre = diff_thre,
-                                max_iter = max_iter)
+                #W_train = FDA_GEV(trainX, trainY, lambda = lambda[i], k = k, diff_thre = diff_thre,
+                #              max_iter = max_iter)
                 #Xmean = apply(trainX, 2, mean)
                 #Ypredict =( (testX - rep(1, dim(testX)[1]) %*% t(Xmean)) %*% W_train) > 0
                # err.re[f, i] =  min( sum(Ypredict == testY), sum(!Ypredict == testY)   )
