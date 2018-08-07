@@ -1,16 +1,12 @@
-# TODO: Add comment
-# 
-# Author: xyy
-###############################################################################
 library(PMA)
 library(MASS)
 library(RSpectra)
 library(msda)
 library(dsda)
-source("GEV.R")
+library(penalizedLDA)
+source("../GEV.R")
 
 args=(commandArgs(TRUE))
-
 ##args is now a list of character vectors
 ## First check to see if arguments are passed.
 ## Then cycle through each element of the list and evaluate the expressions.
@@ -22,26 +18,92 @@ if(length(args)==0){
     }
 }
 
-load(paste("Data/", Type, "_p", p, "_n_", n, "_id", case.id, ".Rdata", sep = ""))
+if(Type == "M"){
+    set.seed(6)
+    mu2 = mu3 = rep(0, p)
+    mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
+    mu3[(21:40) ] = -rnorm(20, -0.5, 0.5)
+    mu = cbind(rep(0, p), mu2, mu3)
+    Sigma = diag(p)
+    
+    for(m in 1:5){
+        mm = p/5 * (m - 1)
+        for(i in 1:(p/5)){
+            for(j in 1:(p/5)){
+                Sigma[i + mm, j + mm] = 0.7^{abs(i - j)}
+            }
+        }
+    }
+    
+    
+    
+    set.seed(case.id)
+    X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
+    X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
+    X3 =   mvrnorm(n = n, mu = mu3, Sigma = Sigma)
+    
+    X_tr = rbind(X1, X2, X3)
+    Y_tr =c(rep(0, n), rep(1, n), rep(2, n))
+    mtotal = apply(X_tr, 2, mean)
+    
+    n2 = 2 * n
+    set.seed(12345)
+    X1_test =   mvrnorm(n = n2, mu = rep(0, p), Sigma = Sigma)
+    X2_test =   mvrnorm(n = n2 , mu = mu2, Sigma = Sigma)
+    X3_test =   mvrnorm(n = n2 , mu = mu3, Sigma = Sigma)
+    X_test = rbind(X1_test, X2_test, X3_test)
+    Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
+}else{
+    
+    mu2 = rep(0, p)
+    mu2[(1:20) ] = rnorm(20, 1, 0.5)
+    Sigma = diag(p)
+    mu = cbind(rep(0, p), mu2)
+    
+    for(m in 1:5){
+        mm = p/5 * (m - 1)
+        for(i in 1:(p/5)){
+            for(j in 1:(p/5)){
+                Sigma[i + mm, j + mm] = 0.7^{abs(i - j)}
+            }
+        }
+    }
+  
+    set.seed(case.id)
+    X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
+    X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
+    X_tr = rbind(X1, X2)
+    Y_tr =c(rep(0, n1), rep(1, n1))
+    X1_test =   mvrnorm(n = n * 2, mu = rep(0, p), Sigma = Sigma)
+    X2_test =   mvrnorm(n = n * 2 , mu = mu2, Sigma = Sigma)
+    X_test = rbind(X1_test, X2_test)
+    Y_test = c(rep(0,  n * 2), rep(1,  n * 2))
+}
 
-Sig_est = Ome_est = matrix(0, 2 * p, 2 * p)
-Ome_est[1:p, (p + 1): (2 * p)] = t(dat$X) %*% dat$Y / n
-Ome_est[ (p + 1): (2 * p), 1:p] = t(dat$Y) %*% dat$X /n
-Sig_est[1:p, 1:p] = t(dat$X) %*% dat$X /n
-Sig_est[(p + 1): (2 * p), (p + 1): (2 * p)] = t(dat$Y) %*% dat$Y / n
+result = matrix(0, 1, 4)
 
-perm.out <- CCA.permute(x = dat$X, z = dat$Y, typex="standard", standardize = FALSE,
-        typez = "standard", nperms = 10, penaltyxs = seq(.02, .9, len = 10))
-W1 = CCA(x = dat$X, z = dat$Y,  penaltyx = perm.out$bestpenaltyx, standardize = FALSE,
-        v = perm.out$v.init, penaltyz = perm.out$bestpenaltyz, K = 2)
+res = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length = 10),  k = 2, max_iter = 2000)
+lambda = res$lambdaopt[1]
 
-U_est = Re(Get_U(Ome_est, 2))
-res = CCACV(dat$X, dat$Y, fold = 5, lambdax =seq(0.01, 0.2, length =20), 
-        lambday =seq(0.01, 0.2, length = 20), k = 2)
-lambda = c(rep( res$lambdaopt[1], p), rep( res$lambdaopt[2], p))
-W2 = GEV_FISTA(Sig_est, U_est, lambda = lambda, diff_thre = 1e-6, max_iter = 1000)
+FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
+        diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
+result[1, 1] = FDA_result$error
 
-result = list(PMA_A = Get_errorF(dat$A, W1$u), PMA_B = Get_errorF(dat$B, W1$v), 
-                    GEV_A = Get_errorF(dat$A, W2[1:p, ]), GEV_B = Get_errorF(dat$B, W2[(p + 1):(2*p), ]), 
-                    resCV = res)
-save(result,  file = paste("./Result/",  Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
+if(Type == "M"){
+    Msda.cv = cv.msda(x = X_tr, y = Y_tr + 1, nfolds = 5, lambda.opt = "max")
+    lambda.min = Msda.cv$lambda.min
+    id.min = which(Msda.cv$lambda == lambda.min)
+    Msda_pred = predict(Msda.cv$msda.fit, X_test)[ , id.min]
+    result[1, 2] = sum(Msda_pred != (Y_test + 1))
+}else{    
+    obj<-dsda(X_tr, Y_tr, X_test, Y_test)  ##perform direct sparse discriminant analysis
+    result[1, 2] = obj$error * dim(X_test)[1]
+}
+
+cv.out =  PenalizedLDA.cv(X_tr, Y_tr + 1, lambdas = c(1e-4, 1e-3, 1e-2, .1, 1, 10), lambda2=.3)
+out = PenalizedLDA(X_tr, Y_tr + 1, xte = X_test,  lambda = cv.out$bestlambda, K = cv.out$bestK, lambda2 = .3)
+result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
+
+result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
+res = list(result = result, FDA_result = FDA_result)
+save(result,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 

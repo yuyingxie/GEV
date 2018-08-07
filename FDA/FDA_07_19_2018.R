@@ -15,10 +15,11 @@ source("../GEV.R")
 ##########################
 n1 = 100
 p = 500
-
+set.seed(6)
 mu2 = rep(0, p)
-mu2[(1:40) ] = 0.5
+mu2[(1:20) ] = rnorm(20, 1, 0.5)
 Sigma = diag(p)
+mu = cbind(rep(0, p), mu2)
 
 for(m in 1:5){
     mm = p/5 * (m - 1)
@@ -45,10 +46,41 @@ Y_test = c(rep(0,  n1), rep(1,  n1))
 #set.seed(6)
 mtotal = apply(X_tr, 2, mean)
 
+result = matrix(0, 1, 4)
 #res = FDACV(X_tr, Y_tr, fold = 3, lambda =seq(0.01, 0.1, length =30),  k = 1)
-res = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.05, 0.10, length =10),  k = 1)
+res = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.01, 0.15, length =15),  k = 1)
 lambda = res$lambdaopt[1]
-W2 = FDA_GEV(X_tr, Y_tr, lambda = lambda, diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE, k = 1 )
+FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = res$lambdaopt[1],
+        diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE, k = 2 )
+result[1, 1] = FDA_result$error
+
+obj<-dsda(X_tr, Y_tr, X_test, Y_test)  ##perform direct sparse discriminant analysis
+result[1, 2] = obj$error * dim(X_test)[1]
+
+cv.out =  PenalizedLDA.cv(X_tr, Y_tr + 1, lambdas = c(1e-4, 1e-3, 1e-2, .1, 1, 10), lambda2=.3)
+out = PenalizedLDA(X_tr, Y_tr + 1, xte = X_test,  lambda = cv.out$bestlambda, K = cv.out$bestK, lambda2 = .3)
+result[1, 3] = sum(out$ypred != (Y_test + 1))
+
+result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
+result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 obj<-dsda(X_tr, Y_tr, X_test, Y_test)  ##perform direct sparse discriminant analysis
 cor(Orc, obj$beta[-1])
@@ -112,12 +144,12 @@ plot( cbind(1, X_tr) %*% obj$beta)
 ##############
 ## K = 3
 ###############
-n1 = 100
+n1 = 150
 p = 500
 set.seed(6)
 mu2 = mu3 = rep(0, p)
-mu2[(1:20) ] = rnorm(20, 1, 0.5)
-mu3[(21:40) ] = -rnorm(20, -1.5, 0.5)
+mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
+mu3[(21:40) ] = -rnorm(20, -0.5, 0.5)
 mu = cbind(rep(0, p), mu2, mu3)
 
 Sigma = diag(p)
@@ -135,7 +167,7 @@ for(m in 1:5){
 ##Oracle 
 #Orc = solve(Sigma) %*% mu2
 
-set.seed(36)
+set.seed(6) # 36 is good
 X1 =   mvrnorm(n = n1, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
 X2 =   mvrnorm(n = n1, mu = mu2, Sigma = Sigma)
 X3 =   mvrnorm(n = n1, mu = mu3, Sigma = Sigma)
@@ -154,9 +186,11 @@ Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 
 result = matrix(0, 1, 4)
 
-res = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.1, 1, length = 10),  k = 2, max_iter = 2000)
-FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = res$lambdaopt[1],
-        diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE, k = 2 )
+res = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length = 10),  k = 2, max_iter = 2000)
+lambda = res$lambdaopt[1]
+
+FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
+        diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
 result[1, 1] = FDA_result$error
 
 Msda.cv = cv.msda(x = X_tr, y = Y_tr + 1, nfolds = 5, lambda.opt = "max")
@@ -172,12 +206,13 @@ result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
 result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
 result
 
-
-
-
-
-
-
+a = rep(0, 10)
+lam = seq(0.02, 0.1, length = 10)
+for(i in 1:10){
+    FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lam[i],
+            diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
+    a[i] = FDA_result$error
+}
 
 
 
