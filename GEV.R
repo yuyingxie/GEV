@@ -169,17 +169,18 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
     p = ncol(X);  n = nrow(X); K = length(unique(Y))
     lambda = rep(lambda, p)
     Sig = matrix(0, p, p)
-    #Ome = matrix(0, p, p)
+   #Ome = matrix(0, p, p)
     for(i in 1:K){
         id = Y == (i - 1)
         sample_size = sum(id)
-        mu = apply(X[id, ], 2, mean)
-        Xtemp = X[id, ] - rep(1, sample_size) %*% t(mu)
+        mu_temp = apply(X[id, ], 2, mean)
+        Xtemp = X[id, ] - rep(1, sample_size) %*% t(mu_temp)
         Sig = Sig +  t( Xtemp ) %*% Xtemp  
-        #Ome = Ome + (sample_size/n) * mu %*% t(mu)
+        #Ome = Ome + (sample_size/n) * mu_temp %*% t(mu_temp)
     }
+            
     U_est = NULL
-    Sig = Sig / n
+    Sig = Sig / (n - K)
     if(K == 2){
         id = Y == 0
         U_est = apply(X[id, ], 2, mean)
@@ -188,10 +189,11 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
         m1 = apply(X[id, ], 2, mean)
         for(j in 1:(K-1)){
             id = Y == j
-            mu = apply(X[id, ], 2, mean)            
-            U_est = cbind(U_est, mu - m1)
+            mu_temp = apply(X[id, ], 2, mean)            
+            U_est = cbind(U_est, mu_temp - m1)
         }        
     }
+    
     #U_est = Get_U(Ome, k)
     W = GEV_FISTA(Sig, as.matrix(U_est), lambda = lambda, diff_thre = diff_thre, max_iter = max_iter)
     return(W)    
