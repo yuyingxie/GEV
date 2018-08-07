@@ -1,0 +1,10 @@
+R CMD BATCH --no-save --no-restore '--args case.id=1 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id1.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=2 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id2.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=3 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id3.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=4 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id4.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=5 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id5.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=6 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id6.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=7 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id7.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=8 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id8.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=9 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id9.txt  &
+R CMD BATCH --no-save --no-restore '--args case.id=10 Type="M" p=500 n=150' GEV_study.R temp/GEV.output._M_p500_n150_id10.txt  &
