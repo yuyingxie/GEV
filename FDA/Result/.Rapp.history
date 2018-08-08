@@ -57,3 +57,28 @@ load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GE
 res$cv_res
 res$result
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id5_Res.Rdata")
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id4_Res.Rdata")
+ls()
+res$cv_res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id5_Res.Rdata")
+res$result
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id37_Res.Rdata")
+res$cv_res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id7_Res.Rdata")
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id44_Res.Rdata")
+res$result
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id27_Res.Rdata")
+res$cv_res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id45_Res.Rdata")
+res$result
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id49_Res.Rdata")
+res$cv_res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id8_Res.Rdata")

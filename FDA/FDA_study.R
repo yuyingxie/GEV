@@ -51,7 +51,8 @@ if(Type == "M"){
     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 }else{    
     mu2 = rep(0, p)
-    mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
+#    mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
+    mu2[1:20] = runif(20, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)
     

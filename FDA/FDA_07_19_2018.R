@@ -64,7 +64,26 @@ result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
 result
 
 
+#########################
+#########################
+Res = matrix(0, 50, 4)
 
+type = "M"
+p = 500
+n = 150
+
+for(i in 1:50){
+    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))
+    Res[i, ] = res$result
+}
+
+apply(Res, 2, mean)
+
+
+result = matrix(0, 50, 4)
+for(i in 1:50){
+    load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_150_id1_Res.Rdata")
+}
 
 
 
