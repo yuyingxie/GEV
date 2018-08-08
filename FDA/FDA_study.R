@@ -19,7 +19,7 @@ if(length(args)==0){
 }
 
 if(Type == "M"){
-    set.seed(6)
+    set.seed(case.id)
     mu2 = mu3 = rep(0, p)
     mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
     mu3[(21:40) ] = -rnorm(20, -0.5, 0.5)
@@ -47,7 +47,6 @@ if(Type == "M"){
     mtotal = apply(X_tr, 2, mean)
     
     n2 = 2 * n
-    set.seed(12345)
     X1_test =   mvrnorm(n = n2, mu = rep(0, p), Sigma = Sigma)
     X2_test =   mvrnorm(n = n2 , mu = mu2, Sigma = Sigma)
     X3_test =   mvrnorm(n = n2 , mu = mu3, Sigma = Sigma)
