@@ -62,8 +62,7 @@ if(Type == "M"){
                 Sigma[i + mm, j + mm] = 0.7^{abs(i - j)}
             }
         }
-    }
-  
+    }   
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -97,7 +96,11 @@ if(Type == "M"){
 
 cv.out =  PenalizedLDA.cv(X_tr, Y_tr + 1, lambdas = c(1e-4, 1e-3, 1e-2, .1, 1, 10), lambda2=.3)
 out = PenalizedLDA(X_tr, Y_tr + 1, xte = X_test,  lambda = cv.out$bestlambda, K = cv.out$bestK, lambda2 = .3)
-result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
+if(Type == "M"){
+    result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
+}else{
+    result[1, 3] = sum(out$ypred != (Y_test + 1))
+}
 result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
 res = list(result = result, FDA_result = FDA_result, cv_res = res1)
 save(res,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
