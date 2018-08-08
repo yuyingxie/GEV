@@ -52,7 +52,7 @@ if(Type == "M"){
 }else{    
     mu2 = rep(0, p)
 #    mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
-    mu2[1:20] = runif(20, 0, 0.5)
+    mu2[1:20] = runif(20, 1, 1.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
     for(m in 1:5){
@@ -72,11 +72,12 @@ if(Type == "M"){
     X2_test =   mvrnorm(n = n * 2 , mu = mu2, Sigma = Sigma)
     X_test = rbind(X1_test, X2_test)
     Y_test = c(rep(0,  n * 2), rep(1,  n * 2)) 
+    #Orc_pred(mu, Sigma, X_test, Y_test)$error
 }
 
 result = matrix(0, 1, 4)
 
-res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.4, length = 20),  k = 2, max_iter = 2000)
+res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.01, 0.2, length = 20),  k = 2, max_iter = 2000)
 lambda = res1$lambdaopt[1]
 
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,

@@ -235,6 +235,23 @@ for(i in 1:10){
 
 
 
+
+Res = matrix(0, 50, 4)
+type = "M"
+p = 500
+n = 150
+
+for(i in 1:50){
+    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))
+    Res[i, ] = res$result
+}
+
+apply(Res, 2, mean)
+
+
+
+
+
 W = FDA_GEV(X_tr, Y_tr, lambda = lambda, diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE, k = 2)
 W_sc = 1/ sqrt(diag(t(W) %*% W))
 W = W %*% diag(W_sc)
