@@ -34,9 +34,6 @@ if(Type == "M"){
             }
         }
     }
-    
-    
-    
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -81,7 +78,7 @@ if(Type == "M"){
 
 result = matrix(0, 1, 4)
 
-res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length = 10),  k = 2, max_iter = 2000)
+res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.4, length = 15),  k = 2, max_iter = 2000)
 lambda = res1$lambdaopt[1]
 
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,

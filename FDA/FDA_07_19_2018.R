@@ -13,11 +13,11 @@ source("../GEV.R")
 ##########################
 #### Binary Case ############
 ##########################
-n1 = 100
+n1 = 150
 p = 500
 set.seed(6)
 mu2 = rep(0, p)
-mu2[(1:20) ] = rnorm(20, 1, 0.5)
+mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
 Sigma = diag(p)
 mu = cbind(rep(0, p), mu2)
 
@@ -39,16 +39,15 @@ X1 =   mvrnorm(n = n1, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
 X2 =   mvrnorm(n = n1, mu = mu2, Sigma = Sigma)
 X_tr = rbind(X1, X2)
 Y_tr =c(rep(0, n1), rep(1, n1))
-X1_test =   mvrnorm(n = n1 , mu = rep(0, p), Sigma = Sigma)
-X2_test =   mvrnorm(n = n1 , mu = mu2, Sigma = Sigma)
+X1_test =   mvrnorm(n = n1 * 2, mu = rep(0, p), Sigma = Sigma)
+X2_test =   mvrnorm(n = n1 * 2, mu = mu2, Sigma = Sigma)
 X_test = rbind(X1_test, X2_test)
-Y_test = c(rep(0,  n1), rep(1,  n1))
+Y_test = c(rep(0,  n1 * 2), rep(1,  n1 * 2))
 #set.seed(6)
-mtotal = apply(X_tr, 2, mean)
 
 result = matrix(0, 1, 4)
 #res = FDACV(X_tr, Y_tr, fold = 3, lambda =seq(0.01, 0.1, length =30),  k = 1)
-res = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.01, 0.15, length =15),  k = 1)
+res = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length =15),  k = 1)
 lambda = res$lambdaopt[1]
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = res$lambdaopt[1],
         diff_thre = 1e-6, max_iter = 1000,  standardize = TRUE, k = 2 )
