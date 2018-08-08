@@ -216,22 +216,26 @@ FDA_pred = function(X, Y, X_test, Y_test, lambda = 0.1, diff_thre = 2e-6, max_it
     W  = FDA_GEV(X, Y, lambda = lambda, diff_thre = diff_thre,  max_iter = max_iter,
             k = k, standardize = standardize)
     Wdim = apply(abs(W), 2, sum) != 0
-    W = as.matrix(W[, Wdim]) # prevent column of all 0
-    mtotal = apply(X, 2, mean)
-    p = ncol(X);  n = nrow(X); K = length(unique(Y))
-    mu = NULL
-    for(i in 1:K){
-        id = Y == (i - 1)
-        sample_size = sum(id)
-        mu = cbind(mu, apply(X[id, ], 2, mean))
+    if(sum(Wdim) == 0){
+        result = list(error = 0.5 * length(Y_test), Ypred = 0, W = W)  
+    }else{
+        W = as.matrix(W[, Wdim]) # prevent column of all 0
+        mtotal = apply(X, 2, mean)
+        p = ncol(X);  n = nrow(X); K = length(unique(Y))
+        mu = NULL
+        for(i in 1:K){
+            id = Y == (i - 1)
+            sample_size = sum(id)
+            mu = cbind(mu, apply(X[id, ], 2, mean))
+        }
+        Z = ( (X - rep(1, length(Y)) %*% t(mtotal)) %*% W)
+        lda_res = lda(x = Z, grouping = Y)
+        Z_test = ( (X_test - rep(1, length(Y_test)) %*% t(mtotal)) %*% W)     
+        Ypred = predict(lda_res, Z_test)$class
+        
+        error = sum(Ypred != Y_test)
+        result = list(error = error, Ypred = Ypred, W = W)        
     }
-    Z = ( (X - rep(1, length(Y)) %*% t(mtotal)) %*% W)
-    lda_res = lda(x = Z, grouping = Y)
-    Z_test = ( (X_test - rep(1, length(Y_test)) %*% t(mtotal)) %*% W)     
-    Ypred = predict(lda_res, Z_test)$class
-    
-    error = sum(Ypred != Y_test)
-    result = list(error = error, Ypred = Ypred, W = W)
     return(result)
 }
 
