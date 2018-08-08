@@ -1,7 +1,7 @@
 
 unlink('command_list')
 for (i in 1:50){
-	for(Type in c("M")){
+	for(Type in c("B")){
 		for(p in c(500)){
 				for(n in c(100)){
 							write(paste("R CMD BATCH --no-save --no-restore '--args case.id=", 
