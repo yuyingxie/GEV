@@ -106,4 +106,4 @@ result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
 
 result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
 res = list(result = result, FDA_result = FDA_result)
-save(result,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
+save(res,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
