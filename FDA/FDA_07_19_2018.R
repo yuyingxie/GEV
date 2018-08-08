@@ -237,7 +237,7 @@ for(i in 1:10){
 
 
 Res = matrix(0, 50, 4)
-type = "M"
+type = "B"
 p = 500
 n = 150
 
