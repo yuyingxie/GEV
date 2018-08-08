@@ -68,11 +68,11 @@ if(Type == "M"){
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
     X_tr = rbind(X1, X2)
-    Y_tr =c(rep(0, n1), rep(1, n1))
+    Y_tr =c(rep(0, n), rep(1, n))
     X1_test =   mvrnorm(n = n * 2, mu = rep(0, p), Sigma = Sigma)
     X2_test =   mvrnorm(n = n * 2 , mu = mu2, Sigma = Sigma)
     X_test = rbind(X1_test, X2_test)
-    Y_test = c(rep(0,  n * 2), rep(1,  n * 2))
+    Y_test = c(rep(0,  n * 2), rep(1,  n * 2)) 
 }
 
 result = matrix(0, 1, 4)
