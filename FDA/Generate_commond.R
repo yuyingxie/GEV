@@ -3,7 +3,7 @@ unlink('command_list')
 for (i in 1:50){
 	for(Type in c("B")){
 		for(p in c(500)){
-				for(n in c(150)){
+				for(n in c(100)){
 							write(paste("R CMD BATCH --no-save --no-restore '--args case.id=", 
 											i, " Type=\"",  Type, "\"", " p=", p, " n=", n,  "' FDA_study.R temp/GEV.output._", Type, 
 											"_",  "p", p, "_n",n, "_id", i, 
