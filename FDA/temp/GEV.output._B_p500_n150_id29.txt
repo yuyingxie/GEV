@@ -1,0 +1,99 @@
+
+R version 3.4.4 (2018-03-15) -- "Someone to Lean On"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(PMA)
+Loading required package: impute
+> library(MASS)
+> library(RSpectra)
+> library(msda)
+Loading required package: Matrix
+> library(dsda)
+> library(penalizedLDA)
+> source("../GEV.R")
+> 
+> args=(commandArgs(TRUE))
+> ##args is now a list of character vectors
+> ## First check to see if arguments are passed.
+> ## Then cycle through each element of the list and evaluate the expressions.
+> if(length(args)==0){
++     case.id = 1  
++ }else{
++     for(i in 1:length(args)){
++         eval(parse(text=args[[i]]))
++     }
++ }
+> 
+> if(Type == "M"){
++     set.seed(case.id)
++     mu2 = mu3 = rep(0, p)
++     mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
++     mu3[(21:40) ] = -rnorm(20, -0.5, 0.5)
++     mu = cbind(rep(0, p), mu2, mu3)
++     Sigma = diag(p)
++     
++     for(m in 1:5){
++         mm = p/5 * (m - 1)
++         for(i in 1:(p/5)){
++             for(j in 1:(p/5)){
++                 Sigma[i + mm, j + mm] = 0.7^{abs(i - j)}
++             }
++         }
++     }
++     set.seed(case.id)
++     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
++     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
++     X3 =   mvrnorm(n = n, mu = mu3, Sigma = Sigma)
++     
++     X_tr = rbind(X1, X2, X3)
++     Y_tr =c(rep(0, n), rep(1, n), rep(2, n))
++     mtotal = apply(X_tr, 2, mean)
++     
++     n2 = 2 * n
++     X1_test =   mvrnorm(n = n2, mu = rep(0, p), Sigma = Sigma)
++     X2_test =   mvrnorm(n = n2 , mu = mu2, Sigma = Sigma)
++     X3_test =   mvrnorm(n = n2 , mu = mu3, Sigma = Sigma)
++     X_test = rbind(X1_test, X2_test, X3_test)
++     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
++ }else{    
++     mu2 = rep(0, p)
++     mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
++     Sigma = diag(p)
++     mu = cbind(rep(0, p), mu2)
++     
++     for(m in 1:5){
++         mm = p/5 * (m - 1)
++         for(i in 1:(p/5)){
++             for(j in 1:(p/5)){
++                 Sigma[i + mm, j + mm] = 0.7^{abs(i - j)}
++             }
++         }
++     }
++   
++     set.seed(case.id)
++     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
++     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
++     X_tr = rbind(X1, X2)
++     Y_tr =c(rep(0, n1), rep(1, n1))
++     X1_test =   mvrnorm(n = n * 2, mu = rep(0, p), Sigma = Sigma)
++     X2_test =   mvrnorm(n = n * 2 , mu = mu2, Sigma = Sigma)
++     X_test = rbind(X1_test, X2_test)
++     Y_test = c(rep(0,  n * 2), rep(1,  n * 2))
++ }
+Error: object 'n1' not found
+Execution halted
