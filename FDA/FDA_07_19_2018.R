@@ -29,7 +29,7 @@ for(m in 1:5){
         }
     }
 }
-#Omega = NearestNeighborSigma1(p, 5, 10)$Omega
+#Omega = NearestNeighborSigma1(p, 5, 6)$Omega
 #Sigma = solve(Omega)
 ##Oracle 
 Orc = solve(Sigma) %*% mu2
@@ -237,9 +237,9 @@ for(i in 1:10){
 
 
 Res = matrix(0, 50, 4)
-type = "B"
+type = "M"
 p = 500
-n = 150
+n = 100
 
 for(i in 1:50){
     load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))

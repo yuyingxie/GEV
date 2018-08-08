@@ -106,3 +106,45 @@ apply(Res, 2, mean)
 apply(Res, 2, sd)
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id11_Res.Rdata")
 res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id22_Res.Rdata")
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id8_Res.Rdata")
+res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id18_Res.Rdata")
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id28_Res.Rdata")
+res$result
+res$FDA_result$W
+sum(abs(res$FDA_result$W) > 0.000001))
+sum(abs(res$FDA_result$W) > 0.000001)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_100_id2_Res.Rdata")
+res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_100_id20_Res.Rdata")
+res
+res$result
+res$FDA_result$W
+sum(abs(res$FDA_result$W) > 0.0000001))
+sum(abs(res$FDA_result$W) > 0.0000001)
+Res = matrix(0, 50, 4)#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)

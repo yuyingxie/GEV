@@ -34,6 +34,8 @@ if(Type == "M"){
             }
         }
     }
+    Omega = NearestNeighborSigma1(p, 5, 6)$Omega
+    Sigma = solve(Omega)
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -63,6 +65,8 @@ if(Type == "M"){
             }
         }
     }   
+    Omega = NearestNeighborSigma1(p, 5, 6)$Omega
+    Sigma = solve(Omega)
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -87,6 +91,7 @@ if(Type == "M"){
     Msda.cv = cv.msda(x = X_tr, y = Y_tr + 1, nfolds = 5, lambda.opt = "max")
     lambda.min = Msda.cv$lambda.min
     id.min = which(Msda.cv$lambda == lambda.min)
+    obj =  msda(x = X_tr, y = Y_tr + 1, lambda = lambda.min)
     Msda_pred = predict(Msda.cv$msda.fit, X_test)[ , id.min]
     result[1, 2] = sum(Msda_pred != (Y_test + 1))
 }else{    
@@ -94,7 +99,7 @@ if(Type == "M"){
     result[1, 2] = obj$error * dim(X_test)[1]
 }
 
-cv.out =  PenalizedLDA.cv(X_tr, Y_tr + 1, lambdas = c(1e-4, 1e-3, 1e-2, .1, 1, 10), lambda2=.3)
+cv.out =  PenalizedLDA.cv(X_tr, Y_tr + 1, lambdas = c(1e-4, 1e-3, 1e-2, 0.02, 0.05 ,.1,  0.5, 1, 10), lambda2=.3)
 out = PenalizedLDA(X_tr, Y_tr + 1, xte = X_test,  lambda = cv.out$bestlambda, K = cv.out$bestK, lambda2 = .3)
 if(Type == "M"){
     result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
@@ -102,5 +107,5 @@ if(Type == "M"){
     result[1, 3] = sum(out$ypred != (Y_test + 1))
 }
 result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
-res = list(result = result, FDA_result = FDA_result, cv_res = res1)
-save(res,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
+res = list(result = result, FDA_result = FDA_result, cv_res = res1, Mai = obj, Witten = out )
+save(res,  file = paste("./Result/NN_", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
