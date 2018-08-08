@@ -67,7 +67,7 @@ if(Type == "M"){
             }
         }
     }   
-    id = 6
+    id = 9
     Omega = NearestNeighborSigma1(p, 5, id)$Omega
     Sig = solve(Omega)
     Sigma = diag(1/ sqrt(diag(Sig))) %*% Sig %*% diag(1/ sqrt(diag(Sig))) 
