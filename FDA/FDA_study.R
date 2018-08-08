@@ -54,8 +54,7 @@ if(Type == "M"){
 #    mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
     mu2[1:20] = runif(20, 0, 0.5)
     Sigma = diag(p)
-    mu = cbind(rep(0, p), mu2)
-    
+    mu = cbind(rep(0, p), mu2)    
     for(m in 1:5){
         mm = p/5 * (m - 1)
         for(i in 1:(p/5)){
