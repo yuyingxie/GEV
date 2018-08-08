@@ -21,7 +21,7 @@ Type 'q()' to quit R.
 
 > 
 > unlink('command_list')
-> for (i in 11:50){
+> for (i in 1:10){
 + 	for(Type in c("M")){
 + 		for(p in c(500)){
 + 				for(n in c(150)){
@@ -36,4 +36,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.181   0.048   0.214 
+  0.178   0.050   0.226 
