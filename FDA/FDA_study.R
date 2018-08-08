@@ -66,8 +66,11 @@ if(Type == "M"){
             }
         }
     }   
-    Omega = NearestNeighborSigma1(p, 5, 36)$Omega
-    Sigma = solve(Omega)
+    id = 16
+    Omega = NearestNeighborSigma1(p, 5, id)$Omega
+    Sig = solve(Omega)
+    Sigma = diag(1/ sqrt(diag(Sig))) %*% Sig %*% diag(1/ sqrt(diag(Sig))) 
+    image(Sigma[1:40, 1:40])
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
