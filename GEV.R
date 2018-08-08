@@ -576,8 +576,7 @@ NearestNeighborSigma1 = function(p, m,sd){
         Omega[i,] = Omega[i,]/sqrt(Omega.diag[i])
         Omega[,i] = Omega[,i]/sqrt(Omega.diag[i])
         
-    }
-    
+    }    
     
     result = list (Omega = Omega)
     result
