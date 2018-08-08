@@ -82,8 +82,8 @@ if(Type == "M"){
 
 result = matrix(0, 1, 4)
 
-res = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length = 10),  k = 2, max_iter = 2000)
-lambda = res$lambdaopt[1]
+res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.1, 0.3, length = 10),  k = 2, max_iter = 2000)
+lambda = res1$lambdaopt[1]
 
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
         diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
@@ -105,5 +105,5 @@ out = PenalizedLDA(X_tr, Y_tr + 1, xte = X_test,  lambda = cv.out$bestlambda, K 
 result[1, 3] = sum(out$ypred[, 2] != (Y_test + 1))
 
 result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
-res = list(result = result, FDA_result = FDA_result)
+res = list(result = result, FDA_result = FDA_result, cv_res = res1)
 save(res,  file = paste("./Result/", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
