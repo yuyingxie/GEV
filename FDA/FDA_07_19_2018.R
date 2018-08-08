@@ -233,8 +233,8 @@ for(i in 1:10){
 }
 
 
-
-type = "B"
+Res = matrix(0, 50, 4)
+type = "M"
 p = 500
 n = 100
 

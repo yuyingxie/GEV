@@ -190,3 +190,271 @@ for(i in 1:50){#
 }#
 #
 apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id34_Res.Rdata")
+type = "M"#
+p = 500#
+n = 150#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res = matrix(0, 50, 4)#
+#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}
+Res
+type = "M"#
+p = 500#
+n = 150#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res = matrix(0, 50, 4)#
+#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res = matrix(0, 50, 4)#
+#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res = matrix(0, 50, 4)#
+#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id37_Res.Rdata")
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id33_Res.Rdata")
+res$cv_res
+res$FDA_result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id7_Res.Rdata")
+res
+res$result
+res$cv_res
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
+res$result
+res$cv_res
+Res = matrix(0, 50, 4)#
+#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+p
+n
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+res$cv
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id9_Res.Rdata")
+res
+res$result
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id44_Res.Rdata")
+Res$cv
+res$cv_res
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id5_Res.Rdata")
+res$result
+res$cv_res
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+res$cv
+Res
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res
+res$result
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
+res$result
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res
+res$cv
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id9_Res.Rdata")
+res
+res$result
+res$result
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+#
+apply(Res, 2, mean)
+Res
+res$cv
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id40_Res.Rdata")
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id24_Res.Rdata")
+res$result
+res$cv
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id32_Res.Rdata")
+res$cv
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id32_Res.Rdata")
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id32_Res.Rdata")
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id46_Res.Rdata")
+res$result
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id8_Res.Rdata")
+res$result
