@@ -234,21 +234,16 @@ for(i in 1:10){
 
 
 
-
-
-Res = matrix(0, 50, 4)
-type = "M"
+type = "B"
 p = 500
 n = 100
 
 for(i in 1:50){
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))
     Res[i, ] = res$result
 }
 
 apply(Res, 2, mean)
-
-
 
 
 
