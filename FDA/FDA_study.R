@@ -7,9 +7,6 @@ library(penalizedLDA)
 source("../GEV.R")
 
 args=(commandArgs(TRUE))
-##args is now a list of character vectors
-## First check to see if arguments are passed.
-## Then cycle through each element of the list and evaluate the expressions.
 if(length(args)==0){
     case.id = 1  
 }else{
@@ -53,7 +50,7 @@ if(Type == "M"){
     X_test = rbind(X1_test, X2_test, X3_test)
     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 }else{    
-    set.seed(case.id)
+    set.seed(48)
     mu2 = rep(0, p)
     mu2[(1:40) ] = rnorm(20, 0.3, 0.5)
     #mu2[1:20] = runif(20, 0, 0.5)
