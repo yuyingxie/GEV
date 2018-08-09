@@ -52,8 +52,8 @@ if(Type == "M"){
 }else{    
     set.seed(case.id)
     mu2 = rep(0, p)
-    #mu2[1:20] = rnorm(20, 0.3, 0.5)
-    mu2[1:40] = runif(40, 0, 0.5)
+    mu2[1:20] = rnorm(20, 0.3, 0.5)
+    #mu2[1:40] = runif(40, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
     for(m in 1:5){
@@ -65,10 +65,7 @@ if(Type == "M"){
         }
     }   
     id = 9
-    Omega = NearestNeighborSigma1(p, 5, id)$Omega
-    Sig = solve(Omega)
-    Sigma = diag(1/ sqrt(diag(Sig))) %*% Sig %*% diag(1/ sqrt(diag(Sig))) 
-
+    Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
