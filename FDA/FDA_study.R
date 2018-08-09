@@ -19,7 +19,7 @@ if(Type == "M"){
     set.seed(case.id)
     mu2 = mu3 = rep(0, p)
     mu2[(1:20) ] = rnorm(20, 0.3, 0.5)
-    mu3[(21:40) ] = -rnorm(20, -0.5, 0.5)
+    mu3[(21:40) ] = rnorm(20, -0.5, 0.5)
     mu = cbind(rep(0, p), mu2, mu3)
     Sigma = diag(p)
     
@@ -31,9 +31,8 @@ if(Type == "M"){
             }
         }
     }
-    Omega = NearestNeighborSigma1(p, 5, 6)$Omega
-    Sig = solve(Omega)
-    Sigma = diag(1/ sqrt(diag(Sig))) %*% Sig %*% diag(1/ sqrt(diag(Sig))) 
+    id = 6
+    Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -50,7 +49,8 @@ if(Type == "M"){
     X_test = rbind(X1_test, X2_test, X3_test)
     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 }else{    
-    set.seed(50)
+    id = 36
+    set.seed(id)
     mu2 = rep(0, p)
     mu2[1:20] = rnorm(20, 0.3, 0.5)
     #mu2[1:40] = runif(40, 0, 0.5)

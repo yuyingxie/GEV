@@ -254,3 +254,8 @@ Orc = cbind(Orc, solve(Sigma) %*% mu3)
 
 plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% W)
 plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% Orc, xlim = c(-20, 30), ylim = c(-20, 30))
+
+
+sum(abs(Sigma[i, ]) > 0.001)
+
+
