@@ -1,5 +1,3 @@
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id3_Res.Rdata")
-ls()
 result
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_150_id2_Res.Rdata")
 result
@@ -470,3 +468,63 @@ load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GE
 res$cv_res
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id38_Res.Rdata")
 res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id41_Res.Rdata")
+res$result
+res$cv
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+Res
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id5_Res.Rdata")
+res$result
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+res$cv_res
+Res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id38_Res.Rdata")
+res$cv_res
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
+res$result
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+Res
+res$cv_res
+mu
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id8_Res.Rdata")
+res$result
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
