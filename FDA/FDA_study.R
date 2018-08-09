@@ -52,8 +52,8 @@ if(Type == "M"){
 }else{    
     set.seed(case.id)
     mu2 = rep(0, p)
-    mu2[1:20] = rnorm(20, 0.3, 0.5)
-    #mu2[1:20] = runif(20, 0, 0.5)
+    #mu2[1:20] = rnorm(20, 0.3, 0.5)
+    mu2[1:20] = runif(20, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
     for(m in 1:5){
