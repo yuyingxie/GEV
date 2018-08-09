@@ -64,7 +64,7 @@ if(Type == "M"){
             }
         }
     }   
-    id = 6
+    id = 36
     Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
@@ -79,7 +79,7 @@ if(Type == "M"){
 
 result = matrix(0, 1, 4)
 
-res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.01, 0.2, length = 20),  k = 2, max_iter = 2000)
+res1 = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.03, 0.22, length = 20),  k = 2, max_iter = 2000)
 lambda = res1$lambdaopt[1]
 
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
