@@ -252,9 +252,11 @@ Orc_pred = function(mu, Sigma, X_test, Y_test){
     U = matrix(0, p, K - 1); n = dim(X_test)[1]
     mtotal = apply(mu, 1, mean)
     Post = matrix(0, n, K)
+    W = matrix(0, p, K)
    
     for(i in 1:K){
-        Post[, i] = (X_test - 0.5 * rep(1, n) %*% t(mu[, i])) %*% solve(Sigma) %*% (mu[, i] )
+        W[, i] =  solve(Sigma) %*% (mu[, i])
+        Post[, i] = (X_test - 0.5 * rep(1, n) %*% t(mu[, i])) %*% W[, i]        
         #U[, i] = solve(Sigma) %*% (mu[, i + 1] - mu[, 1])
     }
     

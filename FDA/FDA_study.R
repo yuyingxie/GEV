@@ -52,7 +52,7 @@ if(Type == "M"){
     id = 9
     set.seed(id)
     mu2 = rep(0, p)
-    mu2[1:20] = rnorm(20, 0.3, 0.5)
+    mu2[1:40] = rnorm(40, 0.3, 0.5)
     #mu2[1:40] = runif(40, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
@@ -105,6 +105,7 @@ if(Type == "M"){
 }else{
     result[1, 3] = sum(out$ypred != (Y_test + 1))
 }
-result[1, 4] = Orc_pred(mu, Sigma, X_test, Y_test)$error
-res = list(result = result, FDA_result = FDA_result, cv_res = res1, Mai = obj, Witten = out )
+Orc = Orc_pred(mu, Sigma, X_test, Y_test)
+result[1, 4] = Orc$error
+res = list(result = result, FDA_result = FDA_result, cv_res = res1, Mai = obj, Witten = out, Orc = Orc )
 save(res,  file = paste("./Result/NN_", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
