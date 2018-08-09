@@ -50,9 +50,9 @@ if(Type == "M"){
     X_test = rbind(X1_test, X2_test, X3_test)
     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 }else{    
-    set.seed(48)
+    set.seed(case.id)
     mu2 = rep(0, p)
-    mu2[(1:40) ] = rnorm(20, 0.3, 0.5)
+    mu2[1:20] = rnorm(20, 0.3, 0.5)
     #mu2[1:20] = runif(20, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
