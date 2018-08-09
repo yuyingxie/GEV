@@ -583,3 +583,49 @@ NearestNeighborSigma1 = function(p, m,sd){
 }
 
 
+NearestNeighborSigma2 = function(p, m, sd, min_val = 0.2, max_val = 0.8 ){
+# Simulate nearest neighbor network sollow Li&Gui 2006
+# p is the dimension
+# m control the sparsity
+# sd is seed number    
+    set.seed(sd)
+    x = runif(p, 0, 1)
+    y = runif(p, 0, 1)
+    
+    d = matrix(NA, p, p)
+    Omega = matrix(0, p, p)
+    
+    for(i in 1:p){
+        for(j in 1:p){
+            d[i, j] = sqrt((x[i] - x[j])^2 + (y[i] - y[j])^2)
+        }
+    }
+    
+    m.set = matrix(NA, p, m)
+    for(i in 1:p){
+        m.set[i,] = order(d[i, ])[2:(m + 1)]
+    }
+    
+    for(i in 1:p){
+        id = m.set[i,]
+        for(j in 1:m){
+            while({sum(m.set[id[j],] == i) ==1} & {Omega[i,id[j]] == 0 }){
+                Omega[i,id[j]] = runif(1, min_val, max_val)*(-1)^rbinom(1, 1, 0.5)
+                Omega[id[j], i] = Omega[i, id[j]]
+            }
+        }
+        Omega[i, i] = sum(abs(Omega[i,]))
+        if(Omega[i,i] == 0){Omega[i,i] = 1}
+    }
+    Omega.diag = diag(Omega)
+    for(i in 1:p){
+        Omega[i,] = Omega[i,]/sqrt(Omega.diag[i])
+        Omega[,i] = Omega[,i]/sqrt(Omega.diag[i])        
+    }    
+    Sig = solve(Omega)
+    Sigma = diag(1/ sqrt(diag(Sig))) %*% Sig %*% diag(1/ sqrt(diag(Sig))) 
+    result = list (Omega = Omega, Sigma = Sigma)
+    return(result)
+}
+
+
