@@ -269,7 +269,7 @@ Orc_pred = function(mu, Sigma, X_test, Y_test){
        Ypred[i] = (1:K)[id]
    }
    
-   result = list(Ypred = Ypred, error = sum(Ypred != (Y_test + 1) ))
+   result = list(Ypred = Ypred, error = sum(Ypred != (Y_test + 1) ), W = W)
    return(result)
 }
 

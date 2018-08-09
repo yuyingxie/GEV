@@ -49,10 +49,10 @@ if(Type == "M"){
     X_test = rbind(X1_test, X2_test, X3_test)
     Y_test = c(rep(0,  n2 ), rep(1,  n2), rep(2,  n2))
 }else{    
-    id = 9
+    id = 36
     set.seed(id)
     mu2 = rep(0, p)
-    mu2[1:40] = rnorm(40, 0.3, 0.5)
+    mu2[1:20] = rnorm(20, 0.3, 0.5)
     #mu2[1:40] = runif(40, 0, 0.5)
     Sigma = diag(p)
     mu = cbind(rep(0, p), mu2)    
@@ -79,7 +79,7 @@ if(Type == "M"){
 
 result = matrix(0, 1, 4)
 
-res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = seq(0.01, 0.2, length = 20),  k = 2, max_iter = 2000)
+res1 = FDACV(X_tr, Y_tr, fold = 6, lambda = s19830eq(0.01, 0.2, length = 20),  k = 2, max_iter = 2000)
 lambda = res1$lambdaopt[1]
 
 FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
