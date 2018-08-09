@@ -258,4 +258,5 @@ plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% Orc, xlim = c(-20, 30
 
 sum(abs(Sigma[i, ]) > 0.001)
 
+image(round(cbind(mu2, solve(Sigma) %*% mu), 3))
 
