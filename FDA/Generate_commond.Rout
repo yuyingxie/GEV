@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > 
 > unlink('command_list')
 > for (i in 1:50){
-+ 	for(Type in c("B")){
++ 	for(Type in c("M")){
 + 		for(p in c(500)){
 + 				for(n in c(100)){
 + 							write(paste("R CMD BATCH --no-save --no-restore '--args case.id=", 
@@ -36,4 +36,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.176   0.050   0.224 
+  0.177   0.051   0.216 
