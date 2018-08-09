@@ -164,8 +164,7 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
     ######################################################    
     if(standardize){
         X = center_rowmeans(X)
-    }
-    
+    }    
     p = ncol(X);  n = nrow(X); K = length(unique(Y))
     lambda = rep(lambda, p)
     Sig = matrix(0, p, p)
@@ -182,8 +181,10 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
     U_est = NULL
     Sig = Sig / (n - K)
     if(K == 2){
-        id = Y == 0
+        id = Y == 1
         U_est = apply(X[id, ], 2, mean)
+        a = t(U_est) %*% U_est
+        U_est =  U_est / as.numeric(sqrt(a))
     }else{
         id = Y == 0
         m1 = apply(X[id, ], 2, mean)
@@ -191,7 +192,8 @@ FDA_GEV =  function(X, Y, lambda = 0.1, diff_thre = 2e-6, max_iter = 500,
             id = Y == j
             mu_temp = apply(X[id, ], 2, mean)            
             U_est = cbind(U_est, mu_temp - m1)
-        }        
+        }
+        U_est = U_est %*% diag(1/sqrt(diag(t(U_est) %*% U_est))   )
     }
     
     #U_est = Get_U(Ome, k)

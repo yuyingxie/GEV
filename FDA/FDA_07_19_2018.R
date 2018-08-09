@@ -258,5 +258,11 @@ plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% Orc, xlim = c(-20, 30
 
 sum(abs(Sigma[i, ]) > 0.001)
 
-image(round(cbind(mu2, solve(Sigma) %*% mu), 3))
 
+
+
+FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
+        diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
+
+FDA_result$error
+round(cbind(Orc$W, FDA_result$W), 3)
