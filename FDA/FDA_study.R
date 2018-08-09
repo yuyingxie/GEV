@@ -77,6 +77,7 @@ if(Type == "M"){
     Y_test = c(rep(0,  n * 2), rep(1,  n * 2)) 
 }
 
+
 result = matrix(0, 1, 4)
 
 res1 = FDACV(X_tr, Y_tr, fold = 10, lambda = seq(0.03, 0.22, length = 20),  k = 2, max_iter = 2000)
