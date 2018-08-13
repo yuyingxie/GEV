@@ -109,4 +109,4 @@ if(Type == "M"){
 Orc = Orc_pred(mu, Sigma, X_test, Y_test)
 result[1, 4] = Orc$error
 res = list(result = result, FDA_result = FDA_result, cv_res = res1, Mai = obj, Witten = out, Orc = Orc )
-save(res,  file = paste("./Result/NN_", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
+save(res,  file = paste("./Result/T_", Type, "_p", p, "_n_", n,"_id", case.id,"_Res.Rdata", sep = "")) 
