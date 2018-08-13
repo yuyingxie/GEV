@@ -32,7 +32,7 @@ if(Type == "M"){
         }
     }
     id = 6
-    Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
+    # Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)
@@ -65,7 +65,7 @@ if(Type == "M"){
         }
     }   
     id = 36
-    Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
+    #Sigma = NearestNeighborSigma2(p, 5, id, min_val = 0.2, max_val = 0.8)$Sigma
     set.seed(case.id)
     X1 =   mvrnorm(n = n, mu = rep(0, p), Sigma = Sigma) # n x p: 200 x 50
     X2 =   mvrnorm(n = n, mu = mu2, Sigma = Sigma)

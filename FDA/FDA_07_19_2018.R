@@ -234,7 +234,7 @@ for(i in 1:10){
 
 
 Res = matrix(0, 50, 4)
-type = "B"
+type = "M"
 p = 500
 n = 100
 
@@ -256,13 +256,37 @@ plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% W)
 plot( ( X_tr -  rep(1, length(Y_tr)) %*% t(mtotal))    %*% Orc, xlim = c(-20, 30), ylim = c(-20, 30))
 
 
+sum(abs(Sigma[i, ]) > 0.01)
+type = 'B'
+result = matrix(0, 50, 6)
+for(i in 1:50){
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   
+    Orc1 = res$Orc$W
+    id = abs(Orc1[, 2]) > 0.01
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.01) 
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.01)
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.01)
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.01) 
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.01)
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.01)
+    }    
+    
+    
 sum(abs(Sigma[i, ]) > 0.001)
-
-
-
-
-FDA_result = FDA_pred(X_tr, Y_tr, X_test, Y_test, lambda = lambda,
-        diff_thre = 1e-6, max_iter = 3000,  standardize = TRUE, k = 2 )
-
-FDA_result$error
-round(cbind(Orc$W, FDA_result$W), 3)
+type = 'M'
+result = matrix(0, 50, 6)
+for(i in 1:50){
+        load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   
+        Orc1 = res$Orc$W
+        id1 = abs(Orc1[, 2:3]) > 0.001
+        id = (id[,1] + id[, 2]) > 0
+        result[i, 1] = sum(apply(abs(res$FDA_result$W[id, ]), 1, sum) > 0.001)
+        result[i, 2] = sum(  apply(abs( res$Mai$theta$'1'[id, ]), 1, sum) > 0.001)
+        result[i, 3] = sum(apply( abs(res$Witten$discrim[id, ]), 1, sum) > 0.001)
+        result[i, 4] = sum(apply( abs(res$FDA_result$W[!id, ]), 1, sum) > 0.001) 
+        result[i, 5] = sum(apply(abs( res$Mai$theta$'1'[!id, ]), 1, sum) > 0.001)
+        result[i, 6] = sum(apply(abs(res$Witten$discrim[!id,]), 1, sum) > 0.001)
+ }
+    
+    
+    

@@ -1,368 +1,3 @@
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/Result/Toeplitz_p50_n_300_id8_Res.Rdata")
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_150_id2_Res.Rdata")
-res
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_150_id1_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/Normal/B_p500_n_150_id18_Res.Rdata")
-ls()
-res
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_150_id12_Res.Rdata")
-Res = matrix(0, 50, 4)#
-type = "B"#
-p = 500#
-n = 150#
-#
-for(i in 1:50){#
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-apply(Res, 2, sd)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id11_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id22_Res.Rdata")
-Res = matrix(0, 50, 4)#
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id8_Res.Rdata")
-res
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id18_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/B_p500_n_100_id28_Res.Rdata")
-res$result
-res$FDA_result$W
-sum(abs(res$FDA_result$W) > 0.000001))
-sum(abs(res$FDA_result$W) > 0.000001)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_100_id2_Res.Rdata")
-res
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_100_id20_Res.Rdata")
-res
-res$result
-res$FDA_result$W
-sum(abs(res$FDA_result$W) > 0.0000001))
-sum(abs(res$FDA_result$W) > 0.0000001)
-Res = matrix(0, 50, 4)#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/M_p500_n_100_id28_Res.Rdata")
-Res = matrix(0, 50, 4)#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-i
-Res = matrix(0, 50, 4)#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste(type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id47_Res.Rdata")
-res$result
-res$FDA_result
-res$cv_res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id31_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id34_Res.Rdata")
-res$result
-type = "M"#
-p = 500#
-n = 150#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id34_Res.Rdata")
-type = "M"#
-p = 500#
-n = 150#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res = matrix(0, 50, 4)#
-#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}
-Res
-type = "M"#
-p = 500#
-n = 150#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res = matrix(0, 50, 4)#
-#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id37_Res.Rdata")
-res$cv_res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id33_Res.Rdata")
-res$cv_res
-res$FDA_result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id7_Res.Rdata")
-res
-res$result
-res$cv_res
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")
-res$cv_res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
-res$result
-res$cv_res
-Res = matrix(0, 50, 4)#
-#
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-p
-n
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-res$cv
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id9_Res.Rdata")
-res
-res$result
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id44_Res.Rdata")
-Res$cv
-res$cv_res
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id5_Res.Rdata")
-res$result
-res$cv_res
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-res$cv
-Res
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res
-res$result
-res$cv_res
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
-res$result
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res
-res$cv
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id9_Res.Rdata")
-res
-res$result
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res
-res$cv
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id40_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id24_Res.Rdata")
-res$result
-res$cv
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id32_Res.Rdata")
-res$cv
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id32_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id46_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id8_Res.Rdata")
-res$result
-load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id49_Res.Rdata")
-res$result
-res$cv_res
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}
-Res = matrix(0, 50, 4)#
-type = "B"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
-Res = matrix(0, 50, 4)#
-type = "M"#
-p = 500#
-n = 100#
-#
-for(i in 1:50){#
-    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
-    Res[i, ] = res$result#
-}#
-#
-apply(Res, 2, mean)
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id46_Res.Rdata")
 res$result
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id44_Res.Rdata")
@@ -548,7 +183,6 @@ res$Witten
 str(res$Witten)
 res$Witten$discrim
 res$FDA_result$W
-res$FDA_result$W
 apply(Res, 2, mean)
 load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id3_Res.Rdata")
 apply(Res, 2, sd)
@@ -636,3 +270,259 @@ for(i in 1:50){#
     Res[i, ] = res$result#
 }#
 apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id6_Res.Rdata")
+ls()
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+res$Orc$W
+res$Mai$beta
+Res
+apply(Res, 2, mean0)
+apply(Res, 2, mean)
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_M_p500_n_100_id20_Res.Rdata")
+res$result
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+Res = matrix(0, 50, 4)#
+type = "B"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, sd)
+Orc1 = res$Orc$W
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")
+cbind(Orc1, res$Orc$W)
+Orc1 = res$Orc$W
+id = abs(Orc1) > 0.001
+id
+id = abs(Orc1[, 2]) > 0.001
+id
+res$FDA_result$W
+result = matrix(0, 1, 3)
+result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001)
+result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001)
+id
+sum(abs(res$FDA_result$W[id]) > 0.001)
+result = matrix(0, 50, 3)#
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")#
+Orc1 = res$Orc$W#
+id = abs(Orc1[, 2]) > 0.001#
+result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001)
+sum(id)
+abs(res$FDA_result$W[id]) > 0.001
+abs(res$FDA_result$W[id]) > 0.0001
+sum(abs(res$FDA_result$W[id]) > 0.0001
+)
+sum(abs(res$FDA_result$W[id]) > 0.000001)
+res$Mai$beta
+sum(abs( res$Mai$beta) > 0.001)
+sum(abs( res$Mai$beta[id]) > 0.001)
+Res
+sum(abs( res$Mai$beta[id]) > 0.001)
+sum(abs( res$Mai$beta[id]) > 0.001)
+res$Mai$beta[id])
+res$Mai$beta[id]
+res$FDA_result$W[id]
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id46_Res.Rdata")
+res$FDA_result$W[id]
+res$Mai$beta[id]
+length(res$Mai$beta)
+res$Mai$beta[-1][id
+]
+sum(abs(res$FDA_result$W[id]) > 0.001)
+sum(abs( res$Mai$beta[-1][id]) > 0.001)
+Res
+res$Witten$discrim
+res$Witten$discrim
+sum(abs(res$Witten$discrim[id]) > 0.001)
+result = matrix(0, 50, 6)#
+load("/Users/yuyingxie/Dropbox (ValdarLab)/Michigan_State_Idea/Manuscript/GEV/GEV/FDA/Result/NN_B_p500_n_100_id49_Res.Rdata")#
+Orc1 = res$Orc$W#
+id = abs(Orc1[, 2]) > 0.001#
+result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001) #
+result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.001)#
+result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.001)#
+result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.001) #
+result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.001)#
+result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.001)
+result[1,]
+i
+result[50,]
+res$result
+sum(abs(Sigma[i, ]) > 0.001)#
+type = 'B'#
+result = matrix(0, 50, 6)#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   Orc1 = res$Orc$W#
+    id = abs(Orc1[, 2]) > 0.001#
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001) #
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.001)#
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.001)#
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.001) #
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.001)#
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.001)#
+    }
+result = matrix(0, 50, 6)#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   #
+    Orc1 = res$Orc$W#
+    id = abs(Orc1[, 2]) > 0.001#
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001) #
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.001)#
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.001)#
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.001) #
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.001)#
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.001)#
+    }
+result
+apply(result, 2, mean)
+apply(result, 2, sd)
+sum(id)
+type = 'M'#
+result = matrix(0, 50, 6)#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   #
+    Orc1 = res$Orc$W#
+    id = abs(Orc1[, 2]) > 0.001#
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001) #
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.001)#
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.001)#
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.001) #
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.001)#
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.001)#
+    }
+Res = matrix(0, 50, 4)#
+type = "M"#
+p = 500#
+n = 100#
+#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))#
+    Res[i, ] = res$result#
+}#
+apply(Res, 2, mean)
+res
+res$Mai$theta
+Orc1 = res$Orc$W
+Orc1
+res$(res$FDA_result$W[id])
+(res$FDA_result$W[id])
+id
+Orc1 = res$Orc$W#
+        id = abs(Orc1[, 2:3]) > 0.001
+id
+abs(res$FDA_result$W[id])
+abs(res$FDA_result$W)
+sum(id)
+abs(res$FDA_result$W[id])
+res$Mai$theta
+di（res$Mai$theta
+dimres$Mai$theta
+dim(res$Mai$theta
+)
+)
+dim(as.matrix(res$Mai$theta))
+(as.matrix(res$Mai$theta))
+(as.matrix(res$Mai$theta))
+res$Mai$theta
+class(res$Mai$theta
+)
+class(res$Mai$theta[, 1]
+)
+res$Mai$theta[, 1]
+res$Mai$theta
+res$Mai$theta[1, ]
+as.matrix(res$Mai$theta
+)
+res$Mai$theta[1,]
+t(res$Mai$theta
+)
+res$Mai$theta
+rep（1,(p +1)) +res$Mai$theta
+rep(1,(p +1)) +res$Mai$theta
+t(rep(1,(p +1))) %*% res$Mai$theta
+res$Mai$df
+res$Mai$call
+res$Mai$obj
+Orc1
+round(Orc1
+, 3)
+abs(Orc1[, 2:3]) > 0.001
+id
+id1 = id[,1] + id[,2]
+id1
+su吗（id1
+sum(id1 !=0)
+sum(abs(Sigma[i, ]) > 0.01)#
+type = 'B'#
+result = matrix(0, 50, 6)#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   #
+    Orc1 = res$Orc$W#
+    id = abs(Orc1[, 2]) > 0.001#
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.01) #
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.01)#
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.01)#
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.01) #
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.01)#
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.01)#
+    }
+result
+apply(result, 2, mean)
+sum(id)
+id = abs(Orc1[, 2]) > 0.01
+sum（id)
+sum(id)
+sum(abs(Sigma[i, ]) > 0.01)#
+type = 'B'#
+result = matrix(0, 50, 6)#
+for(i in 1:50){#
+    load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   #
+    Orc1 = res$Orc$W#
+    id = abs(Orc1[, 2]) > 0.01#
+    result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.01) #
+    result[i, 2] = sum(abs( res$Mai$beta[-1][id]) > 0.01)#
+    result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.01)#
+    result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.01) #
+    result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.01)#
+    result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.01)#
+    }
+apply(result, 2, mean)
+class(res$Mai$beta)
+sum(abs(Sigma[i, ]) > 0.001)#
+    type = 'M'#
+    result = matrix(0, 50, 6)#
+    for(i in 1:50){#
+        load(paste("NN_",type, "_p", p, "_n_", n, "_id", i, "_Res.Rdata", sep = ''))   #
+        Orc1 = res$Orc$W#
+        id = abs(Orc1[, 2:3]) > 0.001#
+        result[i, 1] = sum(abs(res$FDA_result$W[id]) > 0.001) #
+        result[i, 2] = sum(abs( res$Mai$beta[-1, ][id]) > 0.001)#
+        result[i, 3] = sum(abs(res$Witten$discrim[id]) > 0.001)#
+        result[i, 4] = sum(abs(res$FDA_result$W[!id]) > 0.001) #
+        result[i, 5] = sum(abs( res$Mai$beta[-1][!id]) > 0.001)#
+        result[i, 6] = sum(abs(res$Witten$discrim[!id]) > 0.001)#
+    }
+sum(abs( res$Mai$theta[-1, ][id]) > 0.001)
+res$Mai$theta[-1, ]
+res$Mai$theta

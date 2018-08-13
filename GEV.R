@@ -467,7 +467,8 @@ FDACV = function (X, Y, fold = 5, lambda= seq(0.001, 0.01, length =10), k = 2,
     ## X: n x p matrix
     ## Y: n x 1 vector  taking values of "0, 1, ..., K"
     ## fold: fold of CV
-    ## lambda: the seq of lambda     
+    ## lambda: the seq of lambda
+    ####################################
     if(standardize){
         X = center_rowmeans(X)
     }
